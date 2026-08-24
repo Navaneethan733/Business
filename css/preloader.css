@@ -1,0 +1,346 @@
+/* ==========================================================================
+   STACKLY PREMIUM PRELOADER
+   Ultra-luxury, modern brand preloader with glowing orbital rings,
+   numeric counter, dynamic status text, and cinematic exit animation.
+   ========================================================================== */
+
+:root {
+  --p-navy-950: #050811;
+  --p-navy-900: #0B1222;
+  --p-navy-800: #121E36;
+  --p-amber-500: #FF8A1E;
+  --p-amber-400: #FFA94D;
+  --p-amber-300: #FFD188;
+  --p-gold-glow: rgba(255, 138, 30, 0.45);
+  --p-text-muted: #8E9DB8;
+}
+
+/* Preloader Container */
+.stackly-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 45%, var(--p-navy-900) 0%, var(--p-navy-950) 85%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+              visibility 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+              transform 0.85s cubic-bezier(0.85, 0, 0.15, 1);
+  will-change: transform, opacity;
+}
+
+/* Split Curtain Effect for Exit */
+.stackly-preloader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.04) translateY(-100%);
+}
+
+/* Ambient Background Canvas */
+.preloader__ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.preloader__glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: preloaderPulse 4s ease-in-out infinite alternate;
+}
+
+.preloader__glow-orb--1 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, var(--p-amber-500) 0%, rgba(255, 138, 30, 0) 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.preloader__glow-orb--2 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #3867d6 0%, rgba(56, 103, 214, 0) 70%);
+  top: 20%;
+  right: 25%;
+  opacity: 0.15;
+}
+
+.preloader__grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+}
+
+/* Preloader Content Box */
+.preloader__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 380px;
+  width: 90%;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Floating Brand / Emblem Orb */
+.preloader__emblem-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+/* Outer Orbital Rings */
+.preloader__ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-top-color: var(--p-amber-500);
+  border-right-color: rgba(255, 170, 77, 0.4);
+  animation: preloaderSpin 2.2s linear infinite;
+}
+
+.preloader__ring--outer {
+  inset: -14px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-bottom-color: var(--p-amber-400);
+  animation: preloaderSpinReverse 4s linear infinite;
+}
+
+.preloader__ring--pulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--p-gold-glow) 0%, transparent 70%);
+  animation: preloaderBreathing 2.4s ease-in-out infinite alternate;
+}
+
+/* Inner Glass Core */
+.preloader__core {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  border-radius: 22px;
+  background: rgba(18, 30, 54, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2),
+              0 0 24px -4px var(--p-gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.preloader__logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 4px 10px rgba(255, 138, 30, 0.4));
+  animation: preloaderLogoFloat 3s ease-in-out infinite;
+}
+
+/* Shimmer scan across core */
+.preloader__core::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 65%
+  );
+  transform: rotate(30deg);
+  animation: preloaderShimmer 2.8s infinite;
+}
+
+/* Brand Name */
+.preloader__title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.preloader__title span {
+  background: linear-gradient(135deg, #FFFFFF 20%, var(--p-amber-400) 80%, var(--p-amber-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Progress Container */
+.preloader__progress-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Progress Bar Track */
+.preloader__track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.preloader__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FF6B00 0%, var(--p-amber-500) 50%, var(--p-amber-300) 100%);
+  border-radius: 99px;
+  box-shadow: 0 0 14px var(--p-amber-500);
+  transition: width 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
+  position: relative;
+}
+
+.preloader__bar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px #FFFFFF, 0 0 18px var(--p-amber-400);
+}
+
+/* Meta Line (Status text + Percentage) */
+.preloader__meta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--p-text-muted);
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.preloader__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.preloader__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--p-amber-500);
+  box-shadow: 0 0 8px var(--p-amber-500);
+  animation: preloaderDotBlink 1s ease-in-out infinite alternate;
+}
+
+.preloader__percent {
+  font-family: 'Sora', monospace, sans-serif;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* Animations */
+@keyframes preloaderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes preloaderSpinReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes preloaderPulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.25; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.45; }
+}
+
+@keyframes preloaderBreathing {
+  0% { transform: scale(0.95); opacity: 0.4; }
+  100% { transform: scale(1.08); opacity: 0.85; }
+}
+
+@keyframes preloaderLogoFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.02); }
+}
+
+@keyframes preloaderShimmer {
+  0% { transform: translateX(-150%) rotate(30deg); }
+  100% { transform: translateX(150%) rotate(30deg); }
+}
+
+@keyframes preloaderDotBlink {
+  0% { opacity: 0.4; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .preloader__emblem-wrap {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+  .preloader__core {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+  }
+  .preloader__logo {
+    width: 38px;
+    height: 38px;
+  }
+  .preloader__title {
+    font-size: 1rem;
+    letter-spacing: 0.28em;
+  }
+}
