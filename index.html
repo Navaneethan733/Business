@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly — Business Consulting & Growth Strategy</title>
+<meta name="description" content="Stackly is a business consulting partner that pairs senior strategy with hands-on execution — helping growing companies stack the right moves, in the right order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --navy-950:#080D1B;
+    --navy-900:#0B1830;
+    --navy-850:#0F2038;
+    --navy-800:#132844;
+    --navy-700:#1C3253;
+    --amber-400:#FFA94D;
+    --amber-500:#FF8A1E;
+    --amber-600:#EA6D00;
+    --paper:#F5F7FB;
+    --white:#FFFFFF;
+    --ink-900:#111A2E;
+    --ink-700:#3B4762;
+    --slate-400:#93A1BE;
+    --slate-500:#6B7891;
+    --line:#E7EAF3;
+    --shadow-soft:0 24px 50px -20px rgba(15,30,60,.18);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    color:var(--ink-700);
+    background:var(--white);
+    line-height:1.65;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  ul{list-style:none;}
+  h1,h2,h3{font-family:'Sora',sans-serif;color:var(--ink-900);}
+  .container{width:100%;max-width:1240px;margin:0 auto;padding:0 32px;}
+  section{position:relative;}
+  ::selection{background:var(--amber-500);color:#1A0F00;}
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--navy-950);}
+  ::-webkit-scrollbar-thumb{background:var(--amber-600);border-radius:10px;}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber-500);outline-offset:3px;border-radius:4px;}
+
+  /* ---------- Reveal / motion utilities ---------- */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--d,0) * .09s);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-44px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+  .reveal-left.in-view{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(44px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);}
+  .reveal-right.in-view{opacity:1;transform:translateX(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:.98rem;padding:16px 30px;border-radius:999px;transition:transform .3s ease,box-shadow .3s ease,background .3s ease,border-color .3s ease,color .3s ease;white-space:nowrap;}
+  .btn i{font-size:.82em;}
+  .btn--primary{background:linear-gradient(90deg,var(--amber-400),var(--amber-600));color:#1A0F00;box-shadow:0 16px 32px -12px rgba(255,138,30,.55);}
+  .btn--primary:hover{transform:translateY(-3px);box-shadow:0 22px 40px -10px rgba(255,138,30,.6);}
+  .btn--outline{border:1.5px solid rgba(255,255,255,.32);color:#fff;}
+  .btn--outline:hover{background:rgba(255,255,255,.08);border-color:#fff;transform:translateY(-3px);}
+  .btn--dark{background:var(--navy-900);color:#fff;}
+  .btn--dark:hover{background:var(--ink-900);transform:translateY(-3px);box-shadow:0 18px 34px -14px rgba(10,20,40,.4);}
+  .btn--lg{padding:19px 38px;font-size:1.05rem;}
+  .btn--sm{padding:12px 20px;font-size:.9rem;}
+
+  /* ---------- Eyebrow / section head ---------- */
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-600);margin-bottom:16px;}
+  .eyebrow::before{content:'';width:7px;height:7px;border-radius:2px;background:var(--amber-500);flex-shrink:0;}
+  .process .eyebrow,.cta-banner .eyebrow{color:var(--amber-500);}
+  .section-head{max-width:640px;margin:0 auto 60px;text-align:center;}
+  .section-head h2{font-weight:700;font-size:clamp(2rem,3.2vw,2.6rem);line-height:1.18;letter-spacing:-.01em;}
+  .section-head p{margin-top:16px;color:var(--slate-500);font-size:1.05rem;}
+  .process .section-head h2{color:#fff;}
+  .process .section-head p{color:var(--slate-400);}
+
+  /* ================= NAV OVERLAY ================= */
+  .nav-overlay{position:fixed;inset:0;background:rgba(4,8,18,.55);opacity:0;pointer-events:none;transition:opacity .35s ease;z-index:998;}
+  body.menu-open .nav-overlay{opacity:1;pointer-events:auto;}
+  body.menu-open{overflow:hidden;}
+
+  /* ================= NAVBAR ================= */
+  .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:24px 0;transition:padding .35s ease,background .35s ease,box-shadow .35s ease;}
+  .navbar.scrolled{padding:14px 0;background:rgba(9,17,35,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(4,9,20,.28);}
+  .navbar__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Sora',sans-serif;font-weight:700;font-size:1.38rem;color:#fff;flex-shrink:0;}
+  .logo__img{height:34px;width:auto;max-width:160px;object-fit:contain;display:block;filter:brightness(0) invert(1);transition:opacity .25s ease;}
+  .logo:hover .logo__img{opacity:.9;}
+  .nav-links{display:flex;align-items:center;gap:0;}
+  .nav-links li{list-style:none;}
+  .nav-links a{display:inline-block;font-size:.92rem;font-weight:500;color:#CBD5E9;position:relative;padding:8px 12px;transition:color .25s ease;}
+  .nav-links a::after{content:'';position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--amber-500);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
+  .nav-links a:hover{color:#fff;}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-links__mobile-cta{display:none;}
+  .navbar__right{display:flex;align-items:center;gap:18px;}
+  .navbar__cta{padding:13px 24px;font-size:.9rem;}
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:26px;height:20px;flex-shrink:0;}
+  .nav-toggle span{display:block;height:2px;width:100%;background:#fff;border-radius:2px;transition:transform .35s ease,opacity .25s ease;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ================= HERO ================= */
+  .hero{
+    background:linear-gradient(160deg,var(--navy-900) 0%,#0E1D3A 55%,var(--navy-850) 100%);
+    color:#fff;padding:158px 0 130px;overflow:hidden;position:relative;
+  }
+  .hero::before{content:'';position:absolute;top:-220px;right:-160px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,30,.20),transparent 70%);pointer-events:none;}
+  .hero::after{content:'';position:absolute;bottom:-260px;left:-220px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(70,120,210,.16),transparent 70%);pointer-events:none;}
+  .hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative;z-index:2;}
+
+  .hero__eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFE1BE;background:rgba(255,138,30,.12);border:1px solid rgba(255,138,30,.35);padding:9px 18px;border-radius:999px;}
+  .hero__eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--amber-500);box-shadow:0 0 0 4px rgba(255,138,30,.25);}
+  .hero__title{font-weight:700;font-size:clamp(2.3rem,4.6vw,3.7rem);line-height:1.1;letter-spacing:-.01em;margin:24px 0 24px;color:#fff;}
+  .hero__title .accent{background:linear-gradient(90deg,var(--amber-400),var(--amber-600));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero__desc{font-size:1.08rem;color:var(--slate-400);max-width:520px;margin-bottom:38px;}
+  .hero__actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:52px;}
+  .hero__proof{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .hero__avatars{display:flex;}
+  .hero__avatars img{width:42px;height:42px;border-radius:50%;border:3px solid var(--navy-900);object-fit:cover;margin-left:-13px;}
+  .hero__avatars img:first-child{margin-left:0;}
+  .hero__proof-text{font-size:.88rem;color:var(--slate-400);}
+  .hero__stars{color:var(--amber-500);font-size:.72rem;letter-spacing:2px;margin-bottom:3px;}
+
+  .hero__eyebrow,.hero__title,.hero__desc,.hero__actions,.hero__proof{opacity:0;transform:translateY(24px);animation:heroUp .8s cubic-bezier(.22,1,.36,1) forwards;}
+  .hero__eyebrow{animation-delay:.1s;}
+  .hero__title{animation-delay:.22s;}
+  .hero__desc{animation-delay:.36s;}
+  .hero__actions{animation-delay:.48s;}
+  .hero__proof{animation-delay:.6s;}
+  @keyframes heroUp{to{opacity:1;transform:translateY(0);}}
+
+  .hero__visual{position:relative;max-width:440px;margin-left:auto;opacity:0;transform:scale(.93) translateY(12px);animation:heroVisual 1s cubic-bezier(.22,1,.36,1) forwards;animation-delay:.32s;}
+  @keyframes heroVisual{to{opacity:1;transform:scale(1) translateY(0);}}
+  .hero__shape{position:absolute;inset:0;border-radius:28px;}
+  .hero__shape--1{background:linear-gradient(135deg,rgba(255,138,30,.28),rgba(255,138,30,.04));border:1px solid rgba(255,138,30,.32);transform:rotate(-9deg) scale(1.03);animation:float1 7s ease-in-out infinite;}
+  .hero__shape--2{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.14);transform:rotate(6deg) scale(1.05);animation:float2 8s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:rotate(-9deg) scale(1.03) translateY(0);}50%{transform:rotate(-6deg) scale(1.03) translateY(-14px);}}
+  @keyframes float2{0%,100%{transform:rotate(6deg) scale(1.05) translateY(0);}50%{transform:rotate(9deg) scale(1.05) translateY(12px);}}
+  .hero__frame{position:relative;z-index:2;border-radius:28px;overflow:hidden;aspect-ratio:4/4.7;box-shadow:0 40px 80px -28px rgba(2,6,16,.65);}
+  .hero__frame img{width:100%;height:100%;object-fit:cover;}
+  .hero__frame::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,13,27,.55) 0%,transparent 38%);}
+
+  .hero__badge-card{position:absolute;left:-9%;bottom:8%;z-index:3;background:rgba(13,24,48,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px 20px;min-width:200px;box-shadow:0 26px 46px -14px rgba(0,0,0,.55);transition:opacity .25s ease,transform .25s ease;}
+  .hero__badge-card.fade{opacity:.35;transform:scale(.96);}
+  .hero__badge-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .hero__badge-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--amber-500),var(--amber-600));display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+  .hero__badge-num{font-family:'Sora',sans-serif;font-weight:700;font-size:1.35rem;color:#fff;line-height:1.2;}
+  .hero__badge-label{font-size:.78rem;color:var(--slate-400);}
+  .hero__dots{display:flex;gap:7px;}
+  .hero__dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);transition:.3s ease;}
+  .hero__dot.active{background:var(--amber-500);width:20px;border-radius:4px;}
+
+  .hero__social{position:absolute;right:30px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:3;}
+  .hero__social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;transition:.3s ease;}
+  .hero__social a:hover{background:var(--amber-500);border-color:var(--amber-500);color:#1A0F00;transform:translateY(-3px);}
+
+  .scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;color:#fff;z-index:3;animation:bounce 2.4s ease-in-out infinite;}
+  @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+
+  /* ================= STATS ================= */
+  .stats{margin-top:-68px;position:relative;z-index:10;}
+  .stats__card{background:#fff;border-radius:22px;box-shadow:0 30px 60px -22px rgba(10,20,40,.2);padding:42px 24px;display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{text-align:center;border-right:1px solid var(--line);padding:0 12px;}
+  .stat:last-child{border-right:none;}
+  .stat__num{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.85rem,3vw,2.5rem);color:var(--ink-900);}
+  .stat__label{font-size:.88rem;color:var(--slate-500);margin-top:6px;}
+
+  /* ================= SERVICES ================= */
+  .services{padding:168px 0 110px;background:var(--paper);}
+  .services__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .service-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px 28px;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;}
+  .service-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-soft);border-color:transparent;}
+  .service-card__icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(255,138,30,.15),rgba(255,138,30,.05));display:flex;align-items:center;justify-content:center;color:var(--amber-600);font-size:1.25rem;margin-bottom:22px;transition:.35s ease;}
+  .service-card:hover .service-card__icon{background:linear-gradient(135deg,var(--amber-500),var(--amber-600));color:#fff;transform:rotate(-6deg) scale(1.06);}
+  .service-card h3{font-weight:600;font-size:1.18rem;margin-bottom:10px;}
+  .service-card p{color:var(--slate-500);font-size:.95rem;margin-bottom:18px;}
+  .service-card__link{font-weight:700;font-size:.88rem;color:var(--ink-900);display:inline-flex;align-items:center;gap:7px;}
+  .service-card__link i{font-size:.78em;transition:transform .3s ease;}
+  .service-card:hover .service-card__link i{transform:translateX(4px);}
+
+  /* ================= PROCESS ================= */
+  .process{padding:120px 0;background:var(--navy-900);color:#fff;overflow:hidden;}
+  .process__track{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;margin-top:72px;}
+  .process__track::before{content:'';position:absolute;top:34px;left:calc(12.5% + 34px);right:calc(12.5% + 34px);height:2px;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 8px,transparent 8px 18px);}
+  .process__step{position:relative;}
+  .process__num{width:68px;height:68px;border-radius:18px;background:var(--navy-800);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:1.15rem;color:var(--amber-500);margin-bottom:24px;position:relative;z-index:2;transition:.35s ease;}
+  .process__step:hover .process__num{background:linear-gradient(135deg,var(--amber-500),var(--amber-600));color:#1A0F00;transform:translateY(-4px);}
+  .process__step h3{color:#fff;font-size:1.15rem;margin-bottom:10px;font-weight:600;}
+  .process__step p{color:var(--slate-400);font-size:.93rem;}
+
+  /* ================= ABOUT ================= */
+  .about{padding:120px 0;background:#fff;}
+  .about__grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:76px;align-items:center;}
+  .about__visual{position:relative;}
+  .about__frame{border-radius:24px;overflow:hidden;aspect-ratio:4/3.3;box-shadow:0 30px 60px -24px rgba(15,25,50,.28);}
+  .about__frame img{width:100%;height:100%;object-fit:cover;}
+  .about__badge{position:absolute;bottom:-22px;right:-18px;background:var(--navy-900);color:#fff;border-radius:18px;padding:20px 26px;box-shadow:0 24px 46px -16px rgba(10,20,45,.4);display:flex;flex-direction:column;line-height:1.3;}
+  .about__badge strong{font-family:'Sora',sans-serif;font-weight:700;font-size:1.9rem;color:var(--amber-500);}
+  .about__badge span{font-size:.82rem;color:var(--slate-400);}
+  .about__content p{font-size:1.03rem;color:var(--ink-700);margin:18px 0 30px;}
+  .about__checklist{display:flex;flex-direction:column;gap:15px;margin-bottom:36px;}
+  .about__checklist li{display:flex;align-items:flex-start;gap:13px;font-size:.98rem;color:var(--ink-700);}
+  .about__checklist i{width:23px;height:23px;border-radius:50%;background:rgba(255,138,30,.14);color:var(--amber-600);display:flex;align-items:center;justify-content:center;font-size:.68rem;flex-shrink:0;margin-top:3px;}
+
+  /* ================= TESTIMONIALS ================= */
+  .testimonials{padding:120px 0;background:var(--paper);}
+  .testimonials__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .t-card{background:#fff;border-radius:20px;padding:32px 28px;border:1px solid var(--line);transition:transform .35s ease,box-shadow .35s ease;}
+  .t-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft);}
+  .t-card__quote-icon{color:rgba(255,138,30,.4);font-size:1.7rem;margin-bottom:14px;}
+  .t-card__stars{color:var(--amber-500);font-size:.72rem;letter-spacing:2px;margin-bottom:14px;}
+  .t-card p{color:var(--ink-700);font-size:.97rem;margin-bottom:26px;}
+  .t-card__person{display:flex;align-items:center;gap:12px;}
+  .t-card__person img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+  .t-card__person strong{display:block;font-size:.94rem;color:var(--ink-900);}
+  .t-card__person span{font-size:.82rem;color:var(--slate-500);}
+
+  /* ================= TRUSTED BY ================= */
+  .trusted{padding:52px 0;background:#fff;border-bottom:1px solid var(--line);}
+  .trusted__label{text-align:center;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-500);margin-bottom:32px;}
+  .trusted__track-wrap{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+  .trusted__track{display:flex;align-items:center;gap:64px;width:max-content;animation:marquee 28s linear infinite;}
+  .trusted__track:hover{animation-play-state:paused;}
+  .trusted__track span{font-family:'Sora',sans-serif;font-weight:700;font-size:1.45rem;color:var(--slate-500);opacity:.5;white-space:nowrap;transition:opacity .3s ease,color .3s ease;}
+  .trusted__track span:hover{opacity:1;color:var(--ink-900);}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ================= WORK / CASE STUDIES ================= */
+  .work{padding:120px 0;background:var(--paper);}
+  .work__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .work-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px 32px;transition:transform .35s ease,box-shadow .35s ease;}
+  .work-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-soft);}
+  .work-card__tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-600);background:rgba(255,138,30,.1);padding:6px 14px;border-radius:999px;margin-bottom:24px;}
+  .work-card__metric{font-family:'Sora',sans-serif;font-weight:800;font-size:2.5rem;color:var(--ink-900);line-height:1;margin-bottom:8px;}
+  .work-card__metric-label{font-size:.88rem;color:var(--slate-500);margin-bottom:24px;}
+  .work-card h3{font-size:1.08rem;font-weight:600;margin-bottom:10px;}
+  .work-card p{font-size:.93rem;color:var(--slate-500);margin-bottom:22px;}
+  .work-card__link{font-weight:700;font-size:.88rem;color:var(--ink-900);display:inline-flex;align-items:center;gap:7px;}
+  .work-card__link i{font-size:.78em;transition:transform .3s ease;}
+  .work-card:hover .work-card__link i{transform:translateX(4px);}
+
+  /* ================= TEAM ================= */
+  .team{padding:120px 0;background:#fff;}
+  .team__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+  .team-card{text-align:center;}
+  .team-card__photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:1/1.08;margin-bottom:20px;}
+  .team-card__photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .team-card:hover .team-card__photo img{transform:scale(1.06);}
+  .team-card__photo::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,24,48,.55),transparent 45%);opacity:0;transition:opacity .35s ease;}
+  .team-card:hover .team-card__photo::after{opacity:1;}
+  .team-card__social{position:absolute;bottom:16px;left:50%;transform:translateX(-50%) translateY(14px);opacity:0;width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink-900);font-size:.85rem;transition:.35s ease;z-index:2;}
+  .team-card:hover .team-card__social{opacity:1;transform:translateX(-50%) translateY(0);}
+  .team-card h3{font-size:1.06rem;font-weight:600;margin-bottom:4px;}
+  .team-card span{font-size:.86rem;color:var(--slate-500);}
+
+  /* ================= FAQ ================= */
+  .faq{padding:120px 0;background:var(--paper);}
+  .faq__list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .faq__item{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .3s ease,box-shadow .3s ease;}
+  .faq__item.open{border-color:transparent;box-shadow:var(--shadow-soft);}
+  .faq__question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 26px;text-align:left;font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;color:var(--ink-900);}
+  .faq__question i{flex-shrink:0;color:var(--amber-600);transition:transform .35s ease;font-size:.82rem;}
+  .faq__item.open .faq__question i{transform:rotate(135deg);}
+  .faq__answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.22,1,.36,1);}
+  .faq__answer p{padding:0 26px 24px;color:var(--slate-500);font-size:.96rem;line-height:1.7;}
+
+  /* ================= CTA BANNER ================= */
+  .cta-banner{background:linear-gradient(135deg,var(--navy-900),#132A4D);padding:110px 0;text-align:center;color:#fff;overflow:hidden;}
+  .cta-banner__shapes{position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.035) 0 2px,transparent 2px 46px);}
+  .cta-banner .eyebrow{justify-content:center;}
+  .cta-banner h2{font-weight:700;font-size:clamp(2rem,4vw,2.9rem);max-width:680px;margin:0 auto 18px;color:#fff;}
+  .cta-banner p{color:var(--slate-400);max-width:560px;margin:0 auto 40px;font-size:1.05rem;}
+
+  /* ================= FOOTER ================= */
+  .footer{background:var(--navy-950);color:var(--slate-400);padding:88px 0 0;}
+  .footer__grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.25fr;gap:50px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .footer .logo{margin-bottom:18px;}
+  .footer__brand p{font-size:.93rem;line-height:1.75;max-width:280px;margin-bottom:24px;}
+  .footer__social{display:flex;gap:11px;}
+  .footer__social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.82rem;transition:.3s ease;}
+  .footer__social a:hover{background:var(--amber-500);border-color:var(--amber-500);color:#1A0F00;transform:translateY(-3px);}
+  .footer h4{font-family:'Sora',sans-serif;color:#fff;font-size:1rem;margin-bottom:22px;font-weight:600;}
+  .footer ul li{margin-bottom:13px;}
+  .footer ul a{font-size:.92rem;transition:.25s ease;display:inline-block;}
+  .footer ul a:hover{color:#fff;transform:translateX(3px);}
+  .footer__contact li{display:flex;align-items:flex-start;gap:11px;font-size:.9rem;line-height:1.5;}
+  .footer__contact i{color:var(--amber-500);margin-top:4px;flex-shrink:0;width:14px;}
+  .footer__newsletter{display:flex;margin-top:18px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);}
+  .footer__newsletter input{flex:1;min-width:0;background:none;border:none;padding:14px 18px;color:#fff;font-size:.87rem;}
+  .footer__newsletter input::placeholder{color:var(--slate-400);}
+  .footer__newsletter button{background:var(--amber-500);color:#1A0F00;padding:0 20px;font-weight:700;font-size:.85rem;transition:background .3s ease;flex-shrink:0;}
+  .footer__newsletter button:hover{background:var(--amber-400);}
+  .footer__bottom{display:flex;justify-content:space-between;align-items:center;padding:26px 0;font-size:.85rem;flex-wrap:wrap;gap:14px;}
+  .footer__bottom-links{display:flex;gap:24px;}
+  .footer__bottom-links a:hover{color:#fff;}
+
+  /* ================= VIDEO MODAL ================= */
+  .video-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;padding:24px;}
+  .video-modal.open{opacity:1;pointer-events:auto;}
+  .video-modal__backdrop{position:absolute;inset:0;background:rgba(4,8,18,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .video-modal__box{position:relative;width:100%;max-width:760px;transform:scale(.92) translateY(16px);transition:transform .35s cubic-bezier(.22,1,.36,1);}
+  .video-modal.open .video-modal__box{transform:scale(1) translateY(0);}
+  .video-modal__close{position:absolute;top:-46px;right:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;transition:.3s ease;}
+  .video-modal__close:hover{background:var(--amber-500);color:#1A0F00;transform:rotate(90deg);}
+  .video-modal__frame{aspect-ratio:16/9;border-radius:20px;background:linear-gradient(135deg,var(--navy-800),var(--navy-950));border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:var(--slate-400);}
+  .video-modal__frame i{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--amber-500),var(--amber-600));color:#1A0F00;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+  .video-modal__frame p{font-size:.92rem;}
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:1080px){
+    .hero__grid{grid-template-columns:1fr;}
+    .hero__visual{margin:56px auto 0;max-width:380px;}
+    .hero__social{display:none;}
+    .services__grid{grid-template-columns:repeat(2,1fr);}
+    .about__grid{gap:50px;}
+    .work__grid{grid-template-columns:repeat(2,1fr);}
+    .team__grid{grid-template-columns:repeat(2,1fr);gap:30px 24px;}
+    .footer__grid{grid-template-columns:1fr 1fr;row-gap:44px;}
+  }
+
+  @media (max-width:900px){
+    .container{padding:0 24px;}
+    .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(320px,82vw);background:var(--navy-900);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:112px 30px 40px;gap:2px;transform:translateX(100%);transition:transform .45s cubic-bezier(.22,1,.36,1);box-shadow:-24px 0 60px rgba(0,0,0,.35);overflow-y:auto;z-index:999;}
+    .nav-links.open{transform:translateX(0);}
+    .nav-links li{width:100%;}
+    .nav-links a{width:100%;padding:15px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-size:1.02rem;}
+    .nav-links a::after{display:none;}
+    .nav-links__mobile-cta{display:block;margin-top:20px;}
+    .navbar__cta{display:none;}
+    .nav-toggle{display:flex;}
+
+    .stats__card{grid-template-columns:repeat(2,1fr);gap:30px 16px;}
+    .stat{border-right:none;}
+
+    .about__grid{grid-template-columns:1fr;}
+    .about__visual{max-width:460px;margin:0 auto;}
+    .about__content{text-align:left;}
+
+    .process__track{grid-template-columns:1fr;gap:40px;max-width:420px;margin-left:auto;margin-right:auto;}
+    .process__track::before{display:none;}
+    .process__step:not(:last-child)::before{content:'';position:absolute;left:33px;top:70px;height:calc(100% + 6px);width:2px;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.22) 0 8px,transparent 8px 18px);}
+  }
+
+  @media (max-width:760px){
+    .testimonials__grid{grid-template-columns:1fr;max-width:460px;margin:0 auto;}
+  }
+
+  @media (max-width:640px){
+    .container{padding:0 20px;}
+    .hero{padding:130px 0 100px;}
+    .hero__actions{flex-direction:column;align-items:stretch;}
+    .hero__actions .btn{width:100%;}
+    .hero__badge-card{left:0;bottom:-14%;min-width:0;width:88%;}
+    .scroll-cue{display:none;}
+    .stats{margin-top:36px;}
+    .stats__card{grid-template-columns:1fr 1fr;padding:32px 18px;}
+    .services{padding:90px 0 90px;}
+    .services__grid{grid-template-columns:1fr;}
+    .work__grid{grid-template-columns:1fr;}
+    .team__grid{grid-template-columns:1fr 1fr;gap:24px 18px;}
+    .faq__question{padding:18px 20px;font-size:.94rem;}
+    .faq__question span{padding-right:4px;}
+    .faq__answer p{padding:0 20px 20px;}
+    .trusted{padding:38px 0;}
+    .trusted__track{gap:40px;}
+    .footer__grid{grid-template-columns:1fr;gap:40px;}
+    .footer__bottom{flex-direction:column;text-align:center;}
+    .about,.process,.testimonials,.cta-banner,.work,.team,.faq{padding:90px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-overlay" data-close-menu></div>
+
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="#top" class="logo" aria-label="Stackly">
+      <img src="images/Logo.webp" alt="Stackly" class="logo__img">
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li class="nav-links__mobile-cta"><a href="login.html" class="btn btn--primary btn--sm" style="width:100%;">Login</a></li>
+    </ul>
+
+    <div class="navbar__right">
+      <a href="login.html" class="btn btn--primary navbar__cta">Login <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <div class="hero__eyebrow"><span class="dot"></span>Trusted Growth Partner</div>
+      <h1 class="hero__title">Grow Your Business With <span class="accent">Powerful</span> Consulting Solutions</h1>
+      <p class="hero__desc">We help ambitious companies simplify operations, sharpen strategy, and build systems that turn growth into something that lasts — starting with your numbers, not a template.</p>
+      <div class="hero__actions">
+        <a href="404.html" class="btn btn--primary">Start Your Consultation <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="btn btn--outline js-watch-video"><i class="fa-solid fa-play"></i> Watch Video</button>
+      </div>
+      <div class="hero__proof">
+        <div class="hero__avatars">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=100&h=100&auto=format&fit=crop" alt="" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=100&h=100&auto=format&fit=crop" alt="" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&h=100&auto=format&fit=crop" alt="" loading="lazy">
+        </div>
+        <div class="hero__proof-text">
+          <div class="hero__stars">★★★★★</div>
+          Trusted by 500+ growing businesses
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__shape hero__shape--1"></div>
+      <div class="hero__shape hero__shape--2"></div>
+      <div class="hero__frame">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000&auto=format&fit=crop" alt="Senior Stackly consultant">
+      </div>
+      <div class="hero__badge-card" id="badgeCard">
+        <div class="hero__badge-top">
+          <span class="hero__badge-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
+          <div>
+            <div class="hero__badge-num" id="badgeNum">500+</div>
+            <div class="hero__badge-label" id="badgeLabel">Projects Delivered</div>
+          </div>
+        </div>
+        <div class="hero__dots" id="heroDots">
+          <button class="hero__dot active" data-i="0" aria-label="Show stat 1"></button>
+          <button class="hero__dot" data-i="1" aria-label="Show stat 2"></button>
+          <button class="hero__dot" data-i="2" aria-label="Show stat 3"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__social">
+    <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+  </div>
+
+  <a href="404.html" class="scroll-cue" aria-label="Scroll to services"><i class="fa-solid fa-chevron-down"></i></a>
+</header>
+
+<section class="stats" aria-label="Company statistics">
+  <div class="container">
+    <div class="stats__card">
+      <div class="stat"><div class="stat__num" data-count="500" data-suffix="+">500+</div><div class="stat__label">Projects Completed</div></div>
+      <div class="stat"><div class="stat__num" data-count="98" data-suffix="%">98%</div><div class="stat__label">Client Satisfaction</div></div>
+      <div class="stat"><div class="stat__num" data-count="15" data-suffix="+">15+</div><div class="stat__label">Years Of Experience</div></div>
+      <div class="stat"><div class="stat__num" data-count="40" data-suffix="+">40+</div><div class="stat__label">Expert Consultants</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="trusted reveal">
+  <div class="container">
+    <div class="trusted__label">Trusted By Growing Teams At</div>
+    <div class="trusted__track-wrap">
+      <div class="trusted__track">
+        <span>Northfield Retail Group</span>
+        <span>Redline Logistics</span>
+        <span>Solace Health</span>
+        <span>Vertex Capital</span>
+        <span>Bramwell &amp; Co.</span>
+        <span>Ashgrove Partners</span>
+        <span>Northfield Retail Group</span>
+        <span>Redline Logistics</span>
+        <span>Solace Health</span>
+        <span>Vertex Capital</span>
+        <span>Bramwell &amp; Co.</span>
+        <span>Ashgrove Partners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Services</div>
+      <h2>Consulting Built Around Your Business Goals</h2>
+      <p>From the first strategy session to full execution, every engagement is scoped around the outcome you actually need — not a fixed package.</p>
+    </div>
+
+    <div class="services__grid">
+      <article class="service-card reveal" style="--d:0">
+        <div class="service-card__icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>Business Strategy</h3>
+        <p>Clear, actionable strategy that turns big goals into a plan your team can actually run on, quarter by quarter.</p>
+        <a href="404.html" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="service-card reveal" style="--d:1">
+        <div class="service-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Financial Advisory</h3>
+        <p>Sharper forecasting, tighter budgets, and financial models that still hold up when conditions change.</p>
+        <a href="404.html" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="service-card reveal" style="--d:2">
+        <div class="service-card__icon"><i class="fa-solid fa-layer-group"></i></div>
+        <h3>Operations Optimization</h3>
+        <p>We find the friction in your workflows and stack better systems in its place — fewer handoffs, faster output.</p>
+        <a href="404.html" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="service-card reveal" style="--d:3">
+        <div class="service-card__icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3>Market Research</h3>
+        <p>Real data on your customers, competitors, and the openings in your market before you commit budget.</p>
+        <a href="404.html" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="service-card reveal" style="--d:4">
+        <div class="service-card__icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        <h3>Digital Transformation</h3>
+        <p>Modern tools and workflows that scale with your team instead of adding another layer of complexity.</p>
+        <a href="404.html" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="service-card reveal" style="--d:5">
+        <div class="service-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Risk &amp; Compliance</h3>
+        <p>Stay ahead of regulatory shifts with a compliance framework built for growth, not just audits.</p>
+        <a href="404.html" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">How We Work</div>
+      <h2>A Proven Process, Stacked In Your Favor</h2>
+      <p>Four stages. No wasted motion. Each one builds directly on the last.</p>
+    </div>
+
+    <div class="process__track">
+      <div class="process__step reveal" style="--d:0">
+        <div class="process__num">01</div>
+        <h3>Discover</h3>
+        <p>We dig into your numbers, systems, and team to find out what's really slowing growth down.</p>
+      </div>
+      <div class="process__step reveal" style="--d:1">
+        <div class="process__num">02</div>
+        <h3>Strategize</h3>
+        <p>You get a prioritized roadmap built around your resources — not a generic 90-slide deck.</p>
+      </div>
+      <div class="process__step reveal" style="--d:2">
+        <div class="process__num">03</div>
+        <h3>Execute</h3>
+        <p>Our consultants work alongside your team to put the plan into motion, not just hand it off.</p>
+      </div>
+      <div class="process__step reveal" style="--d:3">
+        <div class="process__num">04</div>
+        <h3>Elevate</h3>
+        <p>We track results against real metrics and refine the approach as your business grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container about__grid">
+    <div class="about__visual reveal-left">
+      <div class="about__frame">
+        <img src="https://images.unsplash.com/photo-1758518731706-be5d5230e5a5?q=80&w=1200&auto=format&fit=crop" alt="Stackly consultants collaborating with a client team" loading="lazy">
+      </div>
+      <div class="about__badge"><strong>12+</strong><span>Years Guiding Growth</span></div>
+    </div>
+
+    <div class="about__content reveal-right">
+      <div class="eyebrow">Why Stackly</div>
+      <h2>We Stack The Right Moves, In The Right Order</h2>
+      <p>Most consultancies hand you a strategy and walk away. We stay in the room. Our team pairs senior-level strategy with hands-on execution support, so the plan we build together is the plan that actually ships.</p>
+      <ul class="about__checklist">
+        <li><i class="fa-solid fa-check"></i>Senior consultants on every engagement — never a junior bench</li>
+        <li><i class="fa-solid fa-check"></i>Transparent, fixed-scope pricing with no surprise add-ons</li>
+        <li><i class="fa-solid fa-check"></i>Recommendations backed by your data, not industry averages</li>
+        <li><i class="fa-solid fa-check"></i>Hands-on support through execution, not just the strategy phase</li>
+      </ul>
+      <a href="404.html" class="btn btn--dark">See How We Work <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Work</div>
+      <h2>Real Results For Real Businesses</h2>
+      <p>A closer look at the numbers behind a few recent engagements.</p>
+    </div>
+
+    <div class="work__grid">
+      <article class="work-card reveal" style="--d:0">
+        <span class="work-card__tag">Retail</span>
+        <div class="work-card__metric">+156%</div>
+        <div class="work-card__metric-label">Revenue growth in 12 months</div>
+        <h3>Northfield Retail Group</h3>
+        <p>Rebuilt inventory forecasting and store operations, cutting delivery time in half within eighteen months.</p>
+        <a href="404.html" class="work-card__link">Read the full story <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="work-card reveal" style="--d:1">
+        <span class="work-card__tag">Logistics</span>
+        <div class="work-card__metric">+42%</div>
+        <div class="work-card__metric-label">Gain in operational efficiency</div>
+        <h3>Redline Logistics</h3>
+        <p>Streamlined dispatch workflows and vendor management, removing three redundant approval layers.</p>
+        <a href="404.html" class="work-card__link">Read the full story <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="work-card reveal" style="--d:2">
+        <span class="work-card__tag">Healthcare</span>
+        <div class="work-card__metric">$3.2M</div>
+        <div class="work-card__metric-label">Saved before launch</div>
+        <h3>Solace Health</h3>
+        <p>Market research redirected product launch strategy, avoiding a costly market miscalculation.</p>
+        <a href="404.html" class="work-card__link">Read the full story <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Client Success</div>
+      <h2>Trusted By Teams Who Needed Real Results</h2>
+      <p>A few of the businesses we've helped stack sustainable growth.</p>
+    </div>
+
+    <div class="testimonials__grid">
+      <article class="t-card reveal" style="--d:0">
+        <div class="t-card__quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <div class="t-card__stars">★★★★★</div>
+        <p>Stackly rebuilt our operating model from the ground up. Eighteen months later we've cut delivery time in half and finally have forecasts we trust.</p>
+        <div class="t-card__person">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=140&h=140&auto=format&fit=crop" alt="Elena Marsh" loading="lazy">
+          <div><strong>Elena Marsh</strong><span>COO, Northfield Retail Group</span></div>
+        </div>
+      </article>
+
+      <article class="t-card reveal" style="--d:1">
+        <div class="t-card__quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <div class="t-card__stars">★★★★★</div>
+        <p>They didn't hand us a strategy deck and disappear. Their team stayed hands-on through execution, which is the part everyone else skips.</p>
+        <div class="t-card__person">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=140&h=140&auto=format&fit=crop" alt="David Okafor" loading="lazy">
+          <div><strong>David Okafor</strong><span>Founder, Redline Logistics</span></div>
+        </div>
+      </article>
+
+      <article class="t-card reveal" style="--d:2">
+        <div class="t-card__quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <div class="t-card__stars">★★★★★</div>
+        <p>The market research alone paid for the engagement. We walked away from a launch that would have cost us seven figures.</p>
+        <div class="t-card__person">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=140&h=140&auto=format&fit=crop" alt="Priya Anand" loading="lazy">
+          <div><strong>Priya Anand</strong><span>VP Strategy, Solace Health</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="team">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Team</div>
+      <h2>The People Behind Every Engagement</h2>
+      <p>Senior consultants who stay hands-on from strategy through execution.</p>
+    </div>
+
+    <div class="team__grid">
+      <div class="team-card reveal" style="--d:0">
+        <div class="team-card__photo">
+          <img src="https://images.unsplash.com/photo-1648474484044-bb82df2f5a1f?q=80&w=500&auto=format&fit=crop" alt="James Whitfield" loading="lazy">
+          <a href="404.html" class="team-card__social" aria-label="James Whitfield on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <h3>James Whitfield</h3>
+        <span>Founder &amp; Managing Partner</span>
+      </div>
+
+      <div class="team-card reveal" style="--d:1">
+        <div class="team-card__photo">
+          <img src="https://images.unsplash.com/photo-1699899657680-421c2c2d5064?q=80&w=500&auto=format&fit=crop" alt="Sophie Reyes" loading="lazy">
+          <a href="404.html" class="team-card__social" aria-label="Sophie Reyes on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <h3>Sophie Reyes</h3>
+        <span>Head of Strategy</span>
+      </div>
+
+      <div class="team-card reveal" style="--d:2">
+        <div class="team-card__photo">
+          <img src="https://images.unsplash.com/photo-1676989880361-091e12efc056?q=80&w=500&auto=format&fit=crop" alt="Daniel Osei" loading="lazy">
+          <a href="404.html" class="team-card__social" aria-label="Daniel Osei on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <h3>Daniel Osei</h3>
+        <span>Director of Operations</span>
+      </div>
+
+      <div class="team-card reveal" style="--d:3">
+        <div class="team-card__photo">
+          <img src="https://images.unsplash.com/photo-1611432579402-7037e3e2c1e4?q=80&w=500&auto=format&fit=crop" alt="Amara Chen" loading="lazy">
+          <a href="404.html" class="team-card__social" aria-label="Amara Chen on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <h3>Amara Chen</h3>
+        <span>Financial Advisory Lead</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2>Questions? We've Got Answers</h2>
+      <p>Everything you need to know before your first call.</p>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq__item reveal" style="--d:0">
+        <button class="faq__question" aria-expanded="false">
+          <span>How long does a typical engagement last?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>Most engagements run 3 to 6 months, though it depends on scope. We'll give you a clear timeline before any work begins — no open-ended retainers.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:1">
+        <button class="faq__question" aria-expanded="false">
+          <span>Do you work with early-stage companies or only established businesses?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>Both. We tailor the engagement to where you are — a lean strategy sprint for early-stage teams, or a deeper operational overhaul for established companies.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:2">
+        <button class="faq__question" aria-expanded="false">
+          <span>What industries do you specialize in?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>We've worked across retail, logistics, healthcare, and professional services. Our process is industry-agnostic, but we bring sector-specific benchmarks into every engagement.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:3">
+        <button class="faq__question" aria-expanded="false">
+          <span>How is pricing structured?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>Fixed-scope pricing agreed upfront, based on the engagement — never hourly billing that rewards slow work. You'll know the full cost before we start.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:4">
+        <button class="faq__question" aria-expanded="false">
+          <span>What happens after the engagement ends?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>You keep every system, document, and dashboard we build. Many clients also opt into a lighter-touch advisory retainer to keep momentum going.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:5">
+        <button class="faq__question" aria-expanded="false">
+          <span>Can you work with our existing team instead of replacing them?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>Always. We work alongside your team, not around them — the goal is for your people to run the new systems confidently after we leave.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner" id="contact">
+  <div class="cta-banner__shapes" aria-hidden="true"></div>
+  <div class="container reveal">
+    <div class="eyebrow">Get Started</div>
+    <h2>Ready To Build A Business That Scales?</h2>
+    <p>Tell us where you're stuck. We'll map the fastest path to your next stage of growth — no obligation, no fluff.</p>
+    <a href="mailto:hello@stackly.co" class="btn btn--primary btn--lg">Get Your Free Quote <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="logo" aria-label="Stackly">
+          <img src="images/Logo.webp" alt="Stackly" class="logo__img">
+        </a>
+        <p>Stackly is a business consulting partner for teams who want strategy and execution from the same people. We stack the right moves, in the right order, so growth actually sticks.</p>
+        <div class="footer__social">
+          <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="404.html">Business Strategy</a></li>
+          <li><a href="404.html">Financial Advisory</a></li>
+          <li><a href="404.html">Operations Optimization</a></li>
+          <li><a href="404.html">Market Research</a></li>
+          <li><a href="404.html">Digital Transformation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Get In Touch</h4>
+        <ul class="footer__contact">
+          <li><i class="fa-solid fa-location-dot"></i>148 Ashworth Avenue, Suite 400, Austin, TX 73301</li>
+          <li><i class="fa-solid fa-phone"></i>+1 (512) 555-0148</li>
+          <li><i class="fa-solid fa-envelope"></i>hello@stackly.co</li>
+        </ul>
+        <form class="footer__newsletter" id="newsletterForm" onsubmit="handleNewsletterSubmit(event, this)">
+          <input type="email" placeholder="Enter your email" required aria-label="Email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Stackly. All rights reserved.</span>
+      <div class="footer__bottom-links">
+        <a href="404.html">Privacy Policy</a>
+        <a href="404.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="video-modal" id="videoModal">
+  <div class="video-modal__backdrop" data-close></div>
+  <div class="video-modal__box">
+    <button class="video-modal__close" data-close aria-label="Close video"><i class="fa-solid fa-xmark"></i></button>
+    <div class="video-modal__frame">
+      <i class="fa-solid fa-play"></i>
+      <p>Drop your intro video embed here</p>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Navbar scroll state */
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Mobile menu */
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navLinks');
+  const closeMenu = () => {
+    menu.classList.remove('open');
+    toggle.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.querySelector('[data-close-menu]').addEventListener('click', closeMenu);
+
+  /* Scroll reveals */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  /* Stat counters */
+  const counters = document.querySelectorAll('.stat__num');
+  const animateCounter = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    const dur = 1600;
+    let start = null;
+    el.textContent = '0' + suffix;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => statObserver.observe(c));
+
+  /* Hero rotating stat badge */
+  const badgeStats = [
+    { num: '500+', label: 'Projects Delivered' },
+    { num: '98%', label: 'Client Retention' },
+    { num: '15+', label: 'Years Of Experience' }
+  ];
+  const badgeNum = document.getElementById('badgeNum');
+  const badgeLabel = document.getElementById('badgeLabel');
+  const badgeCard = document.getElementById('badgeCard');
+  const dots = document.querySelectorAll('.hero__dot');
+  let badgeIndex = 0, badgeTimer;
+
+  const showBadge = (i) => {
+    badgeIndex = i;
+    badgeCard.classList.add('fade');
+    setTimeout(() => {
+      badgeNum.textContent = badgeStats[i].num;
+      badgeLabel.textContent = badgeStats[i].label;
+      badgeCard.classList.remove('fade');
+    }, reduceMotion ? 0 : 220);
+    dots.forEach((d, di) => d.classList.toggle('active', di === i));
+  };
+  const startBadgeTimer = () => {
+    clearInterval(badgeTimer);
+    badgeTimer = setInterval(() => showBadge((badgeIndex + 1) % badgeStats.length), 4500);
+  };
+  dots.forEach((d, i) => d.addEventListener('click', () => { showBadge(i); startBadgeTimer(); }));
+  startBadgeTimer();
+
+  /* Smooth scroll with sticky-nav offset */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          const y = target.getBoundingClientRect().top + window.scrollY - 88;
+          window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      }
+    });
+  });
+
+  /* Video modal */
+  const videoModal = document.getElementById('videoModal');
+  document.querySelectorAll('.js-watch-video').forEach(btn => {
+    btn.addEventListener('click', () => {
+      videoModal.classList.add('open');
+      document.body.classList.add('menu-open');
+    });
+  });
+  videoModal.querySelectorAll('[data-close]').forEach(el => {
+    el.addEventListener('click', () => {
+      videoModal.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+      videoModal.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+  });
+
+  /* FAQ accordion */
+  document.querySelectorAll('.faq__question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq__item');
+      const answer = item.querySelector('.faq__answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq__item.open').forEach(openItem => {
+        if (openItem !== item) {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq__answer').style.maxHeight = null;
+          openItem.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : null;
+    });
+  });
+
+  /* Newsletter fake-submit feedback */
+  const newsForm = document.getElementById('newsletterForm');
+  newsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = newsForm.querySelector('button');
+    const input = newsForm.querySelector('input');
+    const original = btn.textContent;
+    btn.textContent = 'Subscribed ✓';
+    input.value = '';
+    setTimeout(() => { btn.textContent = original; }, 2200);
+  });
+});
+
+function handleNewsletterSubmit(e, form) {
+  e.preventDefault();
+  const btn = form.querySelector('button');
+  const input = form.querySelector('input[type="email"]');
+  const original = btn.textContent;
+  btn.textContent = 'Subscribed ✓';
+  btn.style.background = '#10B981';
+  btn.style.color = '#fff';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 2500);
+}
+</script>
+
+</body>
+</html>

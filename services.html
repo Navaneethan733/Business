@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Business Consulting & Growth Advisory | Stackly</title>
+<meta name="description" content="Explore Stackly's consulting services: Business Strategy, Financial Advisory, Operations Optimization, Digital Transformation, Market Research, and Risk Compliance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root {
+    --navy-950: #080D1B;
+    --navy-900: #0B1830;
+    --navy-850: #0F2038;
+    --navy-800: #132844;
+    --navy-700: #1C3253;
+    --amber-400: #FFA94D;
+    --amber-500: #FF8A1E;
+    --amber-600: #EA6D00;
+    --paper: #F5F7FB;
+    --white: #FFFFFF;
+    --ink-900: #111A2E;
+    --ink-700: #3B4762;
+    --slate-400: #93A1BE;
+    --slate-500: #6B7891;
+    --line: #E7EAF3;
+    --shadow-soft: 0 24px 50px -20px rgba(15,30,60,.18);
+    --shadow-card: 0 20px 40px -15px rgba(11,24,48,.08);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--ink-700);
+    background: var(--white);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Sora', sans-serif;
+    color: var(--ink-900);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section {
+    position: relative;
+  }
+
+  ::selection {
+    background: var(--amber-500);
+    color: #1A0F00;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--navy-950);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--amber-600);
+    border-radius: 10px;
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--amber-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ---------- Reveal / Motion Utilities ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    transition-delay: calc(var(--d,0) * .08s);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: .98rem;
+    padding: 16px 30px;
+    border-radius: 999px;
+    transition: transform .3s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease, color .3s ease;
+    white-space: nowrap;
+  }
+
+  .btn i {
+    font-size: .85em;
+  }
+
+  .btn--primary {
+    background: linear-gradient(90deg, var(--amber-400), var(--amber-600));
+    color: #1A0F00;
+    box-shadow: 0 16px 32px -12px rgba(255,138,30,.55);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 40px -10px rgba(255,138,30,.6);
+  }
+
+  .btn--outline {
+    border: 1.5px solid rgba(255, 255, 255, .32);
+    color: #fff;
+  }
+
+  .btn--outline:hover {
+    background: rgba(255, 255, 255, .08);
+    border-color: #fff;
+    transform: translateY(-3px);
+  }
+
+  .btn--dark {
+    background: var(--navy-900);
+    color: #fff;
+  }
+
+  .btn--dark:hover {
+    background: var(--ink-900);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px -14px rgba(10,20,40,.4);
+  }
+
+  .btn--sm {
+    padding: 12px 20px;
+    font-size: .9rem;
+  }
+
+  .btn--lg {
+    padding: 18px 38px;
+    font-size: 1.05rem;
+  }
+
+  /* ---------- Eyebrow / Section Head ---------- */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--amber-600);
+    margin-bottom: 16px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--amber-500);
+    flex-shrink: 0;
+  }
+
+  .page-hero .eyebrow, .models .eyebrow, .cta-banner .eyebrow {
+    color: var(--amber-500);
+  }
+
+  .section-head {
+    max-width: 680px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+
+  .section-head h2 {
+    font-weight: 700;
+    font-size: clamp(2rem, 3.2vw, 2.6rem);
+    line-height: 1.2;
+    letter-spacing: -.01em;
+  }
+
+  .section-head p {
+    margin-top: 16px;
+    color: var(--slate-500);
+    font-size: 1.05rem;
+  }
+
+  /* ================= NAV OVERLAY ================= */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 8, 18, .55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease;
+    z-index: 998;
+  }
+
+  body.menu-open .nav-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* ================= NAVBAR ================= */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 24px 0;
+    transition: padding .35s ease, background .35s ease, box-shadow .35s ease;
+  }
+
+  .navbar.scrolled {
+    padding: 14px 0;
+    background: rgba(9, 17, 35, .88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(4, 9, 20, .28);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1.38rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .logo__img {
+    height: 34px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    display: block;
+    filter: brightness(0) invert(1);
+    transition: opacity .25s ease;
+  }
+
+  .logo:hover .logo__img {
+    opacity: .9;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .nav-links li {
+    list-style: none;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    font-size: .92rem;
+    font-weight: 500;
+    color: #CBD5E9;
+    position: relative;
+    padding: 8px 14px;
+    transition: color .25s ease;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 4px;
+    height: 2px;
+    background: var(--amber-500);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+
+  .nav-links a.active, .nav-links a:hover {
+    color: #fff;
+  }
+
+  .nav-links a.active::after, .nav-links a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .nav-links__mobile-cta {
+    display: none;
+  }
+
+  .navbar__right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .navbar__cta {
+    padding: 13px 24px;
+    font-size: .9rem;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 26px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform .35s ease, opacity .25s ease;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ================= SERVICES HERO ================= */
+  .page-hero {
+    background: linear-gradient(160deg, var(--navy-900) 0%, #0E1D3A 55%, var(--navy-850) 100%);
+    color: #fff;
+    padding: 160px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    top: -220px;
+    right: -160px;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 138, 30, .20), transparent 70%);
+    pointer-events: none;
+  }
+
+  .page-hero__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .page-hero h1 {
+    color: #fff;
+    font-size: clamp(2.4rem, 4.2vw, 3.5rem);
+    line-height: 1.14;
+    letter-spacing: -.02em;
+    font-weight: 800;
+    margin-bottom: 22px;
+  }
+
+  .page-hero h1 .accent {
+    background: linear-gradient(90deg, var(--amber-400), var(--amber-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .page-hero p {
+    color: var(--slate-400);
+    font-size: 1.12rem;
+    line-height: 1.7;
+    margin-bottom: 34px;
+    max-width: 580px;
+  }
+
+  .page-hero__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .page-hero__card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 36px 32px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.4);
+    position: relative;
+  }
+
+  .page-hero__card-stat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .page-hero__card-stat:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .page-hero__card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 138, 30, 0.15);
+    color: var(--amber-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .page-hero__card-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .page-hero__card-label {
+    font-size: .88rem;
+    color: var(--slate-400);
+  }
+
+  /* ================= FILTER TABS ================= */
+  .services-filter {
+    padding: 40px 0 20px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .filter-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: .92rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    background: #fff;
+    border: 1px solid var(--line);
+    transition: all .25s ease;
+  }
+
+  .filter-btn:hover {
+    color: var(--ink-900);
+    border-color: var(--slate-400);
+  }
+
+  .filter-btn.active {
+    background: var(--navy-900);
+    color: #fff;
+    border-color: var(--navy-900);
+    box-shadow: 0 4px 14px rgba(11,24,48,0.2);
+  }
+
+  /* ================= DETAILED SERVICES SECTION ================= */
+  .services-main {
+    padding: 90px 0 120px;
+    background: var(--paper);
+  }
+
+  .services-grid-detailed {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .service-box {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    padding: 38px 34px;
+    box-shadow: var(--shadow-card);
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber-400), var(--amber-600));
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+
+  .service-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+    border-color: rgba(255, 138, 30, 0.4);
+  }
+
+  .service-box:hover::before {
+    opacity: 1;
+  }
+
+  .service-box__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .service-box__icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    background: rgba(255, 138, 30, 0.1);
+    color: var(--amber-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    transition: background .3s ease, color .3s ease, transform .3s ease;
+  }
+
+  .service-box:hover .service-box__icon {
+    background: var(--amber-500);
+    color: #1A0F00;
+    transform: scale(1.06);
+  }
+
+  .service-box__badge {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: #F0F4F8;
+    color: var(--navy-800);
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+
+  .service-box h3 {
+    font-size: 1.38rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .service-box p {
+    color: var(--slate-500);
+    font-size: .98rem;
+    line-height: 1.68;
+    margin-bottom: 22px;
+  }
+
+  .service-box__deliverables {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .service-box__deliverables-title {
+    font-size: .82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink-900);
+    margin-bottom: 12px;
+  }
+
+  .service-box__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .service-box__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .9rem;
+    color: var(--ink-700);
+  }
+
+  .service-box__list li i {
+    color: var(--amber-600);
+    font-size: .82rem;
+    flex-shrink: 0;
+  }
+
+  .service-box__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .service-box__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: .92rem;
+    color: var(--amber-600);
+    transition: gap .25s ease, color .25s ease;
+  }
+
+  .service-box__link:hover {
+    gap: 12px;
+    color: var(--amber-500);
+  }
+
+  .service-box__metric {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--slate-500);
+    background: #FAFAFC;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #EDEDF2;
+  }
+
+  /* ================= ENGAGEMENT MODELS ================= */
+  .models {
+    background: var(--navy-900);
+    color: #fff;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .models::before {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 138, 30, .12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .models .section-head h2 {
+    color: #fff;
+  }
+
+  .models .section-head p {
+    color: var(--slate-400);
+  }
+
+  .models__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .model-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+
+  .model-card.featured {
+    background: linear-gradient(180deg, rgba(255, 138, 30, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border-color: var(--amber-500);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -15px rgba(255, 138, 30, 0.25);
+  }
+
+  .model-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--amber-400);
+  }
+
+  .model-card__tag {
+    position: absolute;
+    top: -13px;
+    left: 32px;
+    background: var(--amber-500);
+    color: #1A0F00;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 999px;
+  }
+
+  .model-card__duration {
+    font-size: .84rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--amber-400);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .model-card h3 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .model-card p {
+    font-size: .95rem;
+    color: var(--slate-400);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .model-card__features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 34px;
+    margin-top: auto;
+  }
+
+  .model-card__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: .9rem;
+    color: #CBD5E9;
+    line-height: 1.5;
+  }
+
+  .model-card__features li i {
+    color: var(--amber-500);
+    margin-top: 3px;
+    font-size: .85rem;
+  }
+
+  .model-card .btn {
+    width: 100%;
+  }
+
+  /* ================= PROCESS HIGHLIGHT ================= */
+  .methodology {
+    padding: 120px 0;
+    background: var(--white);
+  }
+
+  .methodology__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .methodology-step {
+    padding: 32px 24px;
+    border-radius: 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transition: transform .3s ease, border-color .3s ease;
+  }
+
+  .methodology-step:hover {
+    transform: translateY(-4px);
+    border-color: var(--amber-500);
+  }
+
+  .methodology-step__num {
+    font-family: 'Sora', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--amber-500);
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .methodology-step h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: var(--ink-900);
+  }
+
+  .methodology-step p {
+    font-size: .92rem;
+    color: var(--slate-500);
+    line-height: 1.6;
+  }
+
+  /* ================= FAQ SECTION ================= */
+  .services-faq {
+    padding: 110px 0;
+    background: var(--paper);
+  }
+
+  .faq__list {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .faq__item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+
+  .faq__item.open {
+    border-color: transparent;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .faq__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 26px;
+    text-align: left;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--ink-900);
+  }
+
+  .faq__question i {
+    flex-shrink: 0;
+    color: var(--amber-600);
+    transition: transform .35s ease;
+    font-size: .82rem;
+  }
+
+  .faq__item.open .faq__question i {
+    transform: rotate(135deg);
+  }
+
+  .faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s cubic-bezier(.22,1,.36,1);
+  }
+
+  .faq__answer p {
+    padding: 0 26px 24px;
+    color: var(--slate-500);
+    font-size: .96rem;
+    line-height: 1.7;
+  }
+
+  /* ================= CTA BANNER ================= */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--navy-900), #132A4D);
+    padding: 110px 0;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cta-banner__shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .5;
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.035) 0 2px, transparent 2px 46px);
+  }
+
+  .cta-banner .eyebrow {
+    justify-content: center;
+  }
+
+  .cta-banner h2 {
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    max-width: 680px;
+    margin: 0 auto 18px;
+    color: #fff;
+  }
+
+  .cta-banner p {
+    color: var(--slate-400);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    font-size: 1.05rem;
+  }
+
+  /* ================= FOOTER ================= */
+  .footer {
+    background: var(--navy-950);
+    color: var(--slate-400);
+    padding: 88px 0 0;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1.25fr;
+    gap: 50px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+  }
+
+  .footer .logo {
+    margin-bottom: 18px;
+  }
+
+  .footer__brand p {
+    font-size: .93rem;
+    line-height: 1.75;
+    max-width: 280px;
+    margin-bottom: 24px;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 11px;
+  }
+
+  .footer__social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: .82rem;
+    transition: .3s ease;
+  }
+
+  .footer__social a:hover {
+    background: var(--amber-500);
+    border-color: var(--amber-500);
+    color: #1A0F00;
+    transform: translateY(-3px);
+  }
+
+  .footer h4 {
+    font-family: 'Sora', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+
+  .footer ul li {
+    margin-bottom: 13px;
+  }
+
+  .footer ul a {
+    font-size: .92rem;
+    transition: .25s ease;
+    display: inline-block;
+  }
+
+  .footer ul a:hover {
+    color: #fff;
+    transform: translateX(3px);
+  }
+
+  .footer__contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    font-size: .9rem;
+    line-height: 1.5;
+  }
+
+  .footer__contact i {
+    color: var(--amber-500);
+    margin-top: 4px;
+    flex-shrink: 0;
+    width: 14px;
+  }
+
+  .footer__newsletter {
+    display: flex;
+    margin-top: 18px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .12);
+  }
+
+  .footer__newsletter input {
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    padding: 14px 18px;
+    color: #fff;
+    font-size: .87rem;
+  }
+
+  .footer__newsletter input::placeholder {
+    color: var(--slate-400);
+  }
+
+  .footer__newsletter button {
+    background: var(--amber-500);
+    color: #1A0F00;
+    padding: 0 20px;
+    font-weight: 700;
+    font-size: .85rem;
+    transition: background .3s ease;
+    flex-shrink: 0;
+  }
+
+  .footer__newsletter button:hover {
+    background: var(--amber-400);
+  }
+
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 0;
+    font-size: .85rem;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .footer__bottom-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer__bottom-links a:hover {
+    color: #fff;
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 1080px) {
+    .page-hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .services-grid-detailed {
+      grid-template-columns: 1fr;
+    }
+    .models__grid {
+      grid-template-columns: 1fr;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .model-card.featured {
+      transform: none;
+    }
+    .methodology__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 44px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .container {
+      padding: 0 24px;
+    }
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: min(320px, 82vw);
+      background: var(--navy-900);
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 112px 30px 40px;
+      gap: 2px;
+      transform: translateX(100%);
+      transition: transform .45s cubic-bezier(.22,1,.36,1);
+      box-shadow: -24px 0 60px rgba(0, 0, 0, .35);
+      overflow-y: auto;
+      z-index: 999;
+    }
+    .nav-links.open {
+      transform: translateX(0);
+    }
+    .nav-links li {
+      width: 100%;
+    }
+    .nav-links a {
+      width: 100%;
+      padding: 15px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      font-size: 1.02rem;
+    }
+    .nav-links a::after {
+      display: none;
+    }
+    .nav-links__mobile-cta {
+      display: block;
+      margin-top: 20px;
+    }
+    .navbar__cta {
+      display: none;
+    }
+    .nav-toggle {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .container {
+      padding: 0 20px;
+    }
+    .page-hero {
+      padding: 130px 0 70px;
+    }
+    .page-hero__actions {
+      flex-direction: column;
+    }
+    .page-hero__actions .btn {
+      width: 100%;
+    }
+    .methodology__grid {
+      grid-template-columns: 1fr;
+    }
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .footer__bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-overlay" data-close-menu></div>
+
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="logo" aria-label="Stackly Home">
+      <img src="images/Logo.webp" alt="Stackly" class="logo__img">
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li class="nav-links__mobile-cta"><a href="login.html" class="btn btn--primary btn--sm" style="width:100%;">Login</a></li>
+    </ul>
+
+    <div class="navbar__right">
+      <a href="login.html" class="btn btn--primary navbar__cta">Login <i class="fa-solid fa-arrow-right"></i></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container page-hero__grid">
+    <div class="page-hero__content">
+      <div class="eyebrow">Capabilities &amp; Solutions</div>
+      <h1>Strategic Consulting Built For <span class="accent">Measurable</span> Impact</h1>
+      <p>We combine senior strategy with hands-on operational execution across 6 core advisory disciplines — helping companies stack the right moves to scale sustainably.</p>
+      <div class="page-hero__actions">
+        <a href="404.html" class="btn btn--primary btn--lg">Book Strategy Call <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="404.html" class="btn btn--outline btn--lg">Explore Services <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+    </div>
+
+    <div class="page-hero__card">
+      <div class="page-hero__card-stat">
+        <div class="page-hero__card-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        <div>
+          <div class="page-hero__card-num">500+</div>
+          <div class="page-hero__card-label">Engagements Successfully Delivered</div>
+        </div>
+      </div>
+      <div class="page-hero__card-stat">
+        <div class="page-hero__card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+        <div>
+          <div class="page-hero__card-num">98%</div>
+          <div class="page-hero__card-label">Client Retention &amp; Extension Rate</div>
+        </div>
+      </div>
+      <div class="page-hero__card-stat">
+        <div class="page-hero__card-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div>
+          <div class="page-hero__card-num">3.4x</div>
+          <div class="page-hero__card-label">Average 18-Month Client ROI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="services-filter" aria-label="Filter services by category">
+  <div class="container">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All Services</button>
+      <button class="filter-btn" data-filter="strategy">Strategy &amp; Growth</button>
+      <button class="filter-btn" data-filter="finance">Finance &amp; Modeling</button>
+      <button class="filter-btn" data-filter="operations">Operations &amp; Tech</button>
+      <button class="filter-btn" data-filter="risk">Risk &amp; Compliance</button>
+    </div>
+  </div>
+</nav>
+
+<main class="services-main" id="services-list">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Capabilities</div>
+      <h2>Tailored Advisory Across Six Growth Disciplines</h2>
+      <p>Every business challenge is unique. We scope each engagement to tackle your specific bottlenecks and accelerate execution.</p>
+    </div>
+
+    <div class="services-grid-detailed">
+      <!-- Service 1 -->
+      <article class="service-box reveal" data-category="strategy" style="--d:0">
+        <div class="service-box__header">
+          <div class="service-box__icon"><i class="fa-solid fa-bullseye"></i></div>
+          <span class="service-box__badge">Growth Core</span>
+        </div>
+        <h3>Business Strategy &amp; Growth Roadmapping</h3>
+        <p>Turn ambitious multi-year revenue goals into an operational roadmap your executive team can execute quarter by quarter with clear milestone accountability.</p>
+        <div class="service-box__deliverables">
+          <div class="service-box__deliverables-title">Key Deliverables</div>
+          <ul class="service-box__list">
+            <li><i class="fa-solid fa-circle-check"></i> 3-Year Strategic Growth Blueprint</li>
+            <li><i class="fa-solid fa-circle-check"></i> Go-To-Market (GTM) Strategy &amp; Channel Plan</li>
+            <li><i class="fa-solid fa-circle-check"></i> Executive KPI Dashboard &amp; OKR Matrix</li>
+          </ul>
+        </div>
+        <div class="service-box__footer">
+          <a href="404.html" class="service-box__link">Discuss This Service <i class="fa-solid fa-arrow-right"></i></a>
+          <span class="service-box__metric">Avg +140% ARR Impact</span>
+        </div>
+      </article>
+
+      <!-- Service 2 -->
+      <article class="service-box reveal" data-category="finance" style="--d:1">
+        <div class="service-box__header">
+          <div class="service-box__icon"><i class="fa-solid fa-chart-line"></i></div>
+          <span class="service-box__badge">Capital Advisory</span>
+        </div>
+        <h3>Financial Advisory &amp; Scenario Modeling</h3>
+        <p>Sharpen your unit economics, optimize working capital, and build dynamic multi-scenario financial models that withstand market turbulence and support capital raises.</p>
+        <div class="service-box__deliverables">
+          <div class="service-box__deliverables-title">Key Deliverables</div>
+          <ul class="service-box__list">
+            <li><i class="fa-solid fa-circle-check"></i> Dynamic 3-Statement Financial Forecast Models</li>
+            <li><i class="fa-solid fa-circle-check"></i> Unit Economics &amp; Margin Expansion Audits</li>
+            <li><i class="fa-solid fa-circle-check"></i> Investor Data Room &amp; Pitch Deck Modeling</li>
+          </ul>
+        </div>
+        <div class="service-box__footer">
+          <a href="404.html" class="service-box__link">Discuss This Service <i class="fa-solid fa-arrow-right"></i></a>
+          <span class="service-box__metric">18-Month Runway Extension</span>
+        </div>
+      </article>
+
+      <!-- Service 3 -->
+      <article class="service-box reveal" data-category="operations" style="--d:2">
+        <div class="service-box__header">
+          <div class="service-box__icon"><i class="fa-solid fa-layer-group"></i></div>
+          <span class="service-box__badge">Efficiency</span>
+        </div>
+        <h3>Operations &amp; Workflow Optimization</h3>
+        <p>We eliminate friction across your delivery pipeline, redesign cross-functional workflows, and implement systems that allow output to scale without head-count bloat.</p>
+        <div class="service-box__deliverables">
+          <div class="service-box__deliverables-title">Key Deliverables</div>
+          <ul class="service-box__list">
+            <li><i class="fa-solid fa-circle-check"></i> End-to-End Workflow &amp; Bottleneck Diagnostics</li>
+            <li><i class="fa-solid fa-circle-check"></i> Standard Operating Procedures (SOPs) Architecture</li>
+            <li><i class="fa-solid fa-circle-check"></i> Supply Chain &amp; Vendor Cost Optimization</li>
+          </ul>
+        </div>
+        <div class="service-box__footer">
+          <a href="404.html" class="service-box__link">Discuss This Service <i class="fa-solid fa-arrow-right"></i></a>
+          <span class="service-box__metric">35% Cycle Time Reduction</span>
+        </div>
+      </article>
+
+      <!-- Service 4 -->
+      <article class="service-box reveal" data-category="strategy" style="--d:3">
+        <div class="service-box__header">
+          <div class="service-box__icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <span class="service-box__badge">Intelligence</span>
+        </div>
+        <h3>Market Research &amp; Competitive Analysis</h3>
+        <p>Ground your product and marketing investments in verified customer sentiment data, pricing elasticity studies, and thorough competitor benchmarking.</p>
+        <div class="service-box__deliverables">
+          <div class="service-box__deliverables-title">Key Deliverables</div>
+          <ul class="service-box__list">
+            <li><i class="fa-solid fa-circle-check"></i> Total Addressable Market (TAM) Sizing</li>
+            <li><i class="fa-solid fa-circle-check"></i> Customer Persona &amp; Willingness-to-Pay Analysis</li>
+            <li><i class="fa-solid fa-circle-check"></i> Competitor Advantage &amp; Feature Gap Analysis</li>
+          </ul>
+        </div>
+        <div class="service-box__footer">
+          <a href="404.html" class="service-box__link">Discuss This Service <i class="fa-solid fa-arrow-right"></i></a>
+          <span class="service-box__metric">Verified Market Fit</span>
+        </div>
+      </article>
+
+      <!-- Service 5 -->
+      <article class="service-box reveal" data-category="operations" style="--d:4">
+        <div class="service-box__header">
+          <div class="service-box__icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <span class="service-box__badge">Technology</span>
+        </div>
+        <h3>Digital Transformation &amp; Stack Modernization</h3>
+        <p>Integrate modern CRM, ERP, automation, and analytics tools that automate repetitive tasks, synchronize departments, and scale seamlessly with team growth.</p>
+        <div class="service-box__deliverables">
+          <div class="service-box__deliverables-title">Key Deliverables</div>
+          <ul class="service-box__list">
+            <li><i class="fa-solid fa-circle-check"></i> Tech Stack Evaluation &amp; Consolidation Audit</li>
+            <li><i class="fa-solid fa-circle-check"></i> CRM / ERP Implementation &amp; Data Migration</li>
+            <li><i class="fa-solid fa-circle-check"></i> Custom Workflow Automation &amp; API Integrations</li>
+          </ul>
+        </div>
+        <div class="service-box__footer">
+          <a href="404.html" class="service-box__link">Discuss This Service <i class="fa-solid fa-arrow-right"></i></a>
+          <span class="service-box__metric">50+ Hours Saved / Week</span>
+        </div>
+      </article>
+
+      <!-- Service 6 -->
+      <article class="service-box reveal" data-category="risk" style="--d:5">
+        <div class="service-box__header">
+          <div class="service-box__icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <span class="service-box__badge">Governance</span>
+        </div>
+        <h3>Risk Management &amp; Regulatory Compliance</h3>
+        <p>Proactively identify regulatory vulnerabilities, build resilient compliance frameworks, and establish governance controls that safeguard company reputation and assets.</p>
+        <div class="service-box__deliverables">
+          <div class="service-box__deliverables-title">Key Deliverables</div>
+          <ul class="service-box__list">
+            <li><i class="fa-solid fa-circle-check"></i> Regulatory Gap Analysis &amp; Audit Preparation</li>
+            <li><i class="fa-solid fa-circle-check"></i> Enterprise Risk Assessment Matrix</li>
+            <li><i class="fa-solid fa-circle-check"></i> Data Governance &amp; Cybersecurity Policies</li>
+          </ul>
+        </div>
+        <div class="service-box__footer">
+          <a href="404.html" class="service-box__link">Discuss This Service <i class="fa-solid fa-arrow-right"></i></a>
+          <span class="service-box__metric">100% Audit Readiness</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
+
+<section class="models">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Flexible Partnerships</div>
+      <h2>How We Engage With Your Team</h2>
+      <p>We believe in transparent scopes with clear deliverables and no open-ended billing.</p>
+    </div>
+
+    <div class="models__grid">
+      <!-- Model 1 -->
+      <div class="model-card reveal" style="--d:0">
+        <div class="model-card__duration">2 to 4 Weeks</div>
+        <h3>Strategy Sprint</h3>
+        <p>Focused advisory sprint to diagnose a specific bottleneck, validate an initiative, or build a fast 90-day execution roadmap.</p>
+        <ul class="model-card__features">
+          <li><i class="fa-solid fa-check"></i> Complete operational/financial diagnostic</li>
+          <li><i class="fa-solid fa-check"></i> Executive alignment workshop</li>
+          <li><i class="fa-solid fa-check"></i> Prioritized 90-day action plan</li>
+          <li><i class="fa-solid fa-check"></i> Resource &amp; budget allocation matrix</li>
+        </ul>
+        <a href="404.html" class="btn btn--outline">Inquire About Sprints</a>
+      </div>
+
+      <!-- Model 2 (Featured) -->
+      <div class="model-card featured reveal" style="--d:1">
+        <div class="model-card__tag">Most Popular</div>
+        <div class="model-card__duration">3 to 6 Months</div>
+        <h3>Embedded Execution</h3>
+        <p>Senior Stackly consultants embed directly alongside your leadership to co-execute the strategy, build systems, and train your people.</p>
+        <ul class="model-card__features">
+          <li><i class="fa-solid fa-check"></i> Dedicated Fractional Strategy Lead</li>
+          <li><i class="fa-solid fa-check"></i> Full system &amp; process implementation</li>
+          <li><i class="fa-solid fa-check"></i> Weekly sprint reviews &amp; KPI tracking</li>
+          <li><i class="fa-solid fa-check"></i> Internal team training &amp; handover</li>
+        </ul>
+        <a href="404.html" class="btn btn--primary">Start Embedded Engagement</a>
+      </div>
+
+      <!-- Model 3 -->
+      <div class="model-card reveal" style="--d:2">
+        <div class="model-card__duration">Ongoing / Quarterly</div>
+        <h3>Advisory Retainer</h3>
+        <p>Continuous strategic counsel for founders and executive teams who need high-level guidance, board review prep, and objective sounding boards.</p>
+        <ul class="model-card__features">
+          <li><i class="fa-solid fa-check"></i> Bi-weekly executive strategy sessions</li>
+          <li><i class="fa-solid fa-check"></i> Quarterly business review (QBR) prep</li>
+          <li><i class="fa-solid fa-check"></i> On-demand model &amp; deal review</li>
+          <li><i class="fa-solid fa-check"></i> Direct async Slack/phone access</li>
+        </ul>
+        <a href="404.html" class="btn btn--outline">Explore Advisory Retainers</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="methodology">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Our Methodology</div>
+      <h2>A Tested Framework For Sustainable Growth</h2>
+      <p>Our 4-step delivery architecture ensures zero wasted motion and measurable ROI.</p>
+    </div>
+
+    <div class="methodology__grid">
+      <div class="methodology-step reveal" style="--d:0">
+        <div class="methodology-step__num">01</div>
+        <h3>Discover &amp; Audit</h3>
+        <p>We analyze your financials, workflows, and operational metrics to uncover the root constraints holding growth back.</p>
+      </div>
+
+      <div class="methodology-step reveal" style="--d:1">
+        <div class="methodology-step__num">02</div>
+        <h3>Architect &amp; Plan</h3>
+        <p>We design a bespoke strategy with prioritized sprints, resource mappings, and quantifiable milestone checkpoints.</p>
+      </div>
+
+      <div class="methodology-step reveal" style="--d:2">
+        <div class="methodology-step__num">03</div>
+        <h3>Deploy &amp; Execute</h3>
+        <p>Our consultants work side-by-side with your staff to roll out systems, automate handoffs, and optimize operations.</p>
+      </div>
+
+      <div class="methodology-step reveal" style="--d:3">
+        <div class="methodology-step__num">04</div>
+        <h3>Scale &amp; Handover</h3>
+        <p>We document every protocol, train your team for full autonomy, and measure sustained performance over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2>Frequently Asked Questions About Our Services</h2>
+      <p>Have questions about working together? Here are the most common details.</p>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq__item reveal" style="--d:0">
+        <button class="faq__question" aria-expanded="false">
+          <span>How do you determine which service engagement is right for us?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>We start with a complimentary 30-minute discovery call where we review your current growth stage, primary bottlenecks, and timeline. Based on that, we recommend either a lean Strategy Sprint or an Embedded Execution engagement.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:1">
+        <button class="faq__question" aria-expanded="false">
+          <span>Will our team need to spend significant time on this?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>We design our engagements to minimize disruption to daily operations. During the audit phase, we need 2-4 hours with key department heads. During execution, we handle the heavy lifting while keeping you updated via weekly syncs.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:2">
+        <button class="faq__question" aria-expanded="false">
+          <span>What deliverables do we own after an engagement?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>You own 100% of all intellectual property, financial models, SOP documentation, automated workflows, and dashboards created during our partnership.</p>
+        </div>
+      </div>
+
+      <div class="faq__item reveal" style="--d:3">
+        <button class="faq__question" aria-expanded="false">
+          <span>How are project fees structured?</span>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <div class="faq__answer">
+          <p>We operate strictly on fixed-scope, outcome-based project pricing agreed upon upfront. We do not do ambiguous hourly billing that creates misaligned incentives.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner" id="contact">
+  <div class="cta-banner__shapes" aria-hidden="true"></div>
+  <div class="container reveal">
+    <div class="eyebrow">Get Started</div>
+    <h2>Ready To Accelerate Your Business Growth?</h2>
+    <p>Schedule a no-obligation strategy consultation to explore how Stackly can help your team execute the right moves, in the right order.</p>
+    <a href="404.html" class="btn btn--primary btn--lg">Book Your Strategy Session <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo" aria-label="Stackly">
+          <img src="images/Logo.webp" alt="Stackly" class="logo__img">
+        </a>
+        <p>Stackly is a business consulting partner for teams who want strategy and execution from the same people. We stack the right moves, in the right order, so growth actually sticks.</p>
+        <div class="footer__social">
+          <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="404.html">Business Strategy</a></li>
+          <li><a href="404.html">Financial Advisory</a></li>
+          <li><a href="404.html">Operations Optimization</a></li>
+          <li><a href="404.html">Market Research</a></li>
+          <li><a href="404.html">Digital Transformation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Get In Touch</h4>
+        <ul class="footer__contact">
+          <li><i class="fa-solid fa-location-dot"></i>148 Ashworth Avenue, Suite 400, Austin, TX 73301</li>
+          <li><i class="fa-solid fa-phone"></i>+1 (512) 555-0148</li>
+          <li><i class="fa-solid fa-envelope"></i>hello@stackly.co</li>
+        </ul>
+        <form class="footer__newsletter" id="newsletterForm" onsubmit="handleNewsletterSubmit(event, this)">
+          <input type="email" placeholder="Enter your email" required aria-label="Email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Stackly. All rights reserved.</span>
+      <div class="footer__bottom-links">
+        <a href="404.html">Privacy Policy</a>
+        <a href="404.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Navbar scroll state */
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Mobile menu */
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navLinks');
+  const closeMenu = () => {
+    menu.classList.remove('open');
+    toggle.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.querySelector('[data-close-menu]').addEventListener('click', closeMenu);
+
+  /* Scroll reveals */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  /* Interactive Filter Tabs */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const serviceCards = document.querySelectorAll('.service-box');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      serviceCards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'flex';
+          setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+          setTimeout(() => { card.style.display = 'none'; }, 250);
+        }
+      });
+    });
+  });
+
+  /* FAQ Accordion */
+  document.querySelectorAll('.faq__question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq__item');
+      const answer = item.querySelector('.faq__answer');
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.faq__item.open').forEach(openItem => {
+        if (openItem !== item) {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq__answer').style.maxHeight = null;
+          openItem.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : null;
+    });
+  });
+
+  /* Newsletter submit feedback */
+  const newsForm = document.getElementById('newsletterForm');
+  newsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = newsForm.querySelector('button');
+    const input = newsForm.querySelector('input');
+    const original = btn.textContent;
+    btn.textContent = 'Subscribed ✓';
+    input.value = '';
+    setTimeout(() => { btn.textContent = original; }, 2200);
+  });
+});
+
+function handleNewsletterSubmit(e, form) {
+  e.preventDefault();
+  const btn = form.querySelector('button');
+  const input = form.querySelector('input[type="email"]');
+  const original = btn.textContent;
+  btn.textContent = 'Subscribed ✓';
+  btn.style.background = '#10B981';
+  btn.style.color = '#fff';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 2500);
+}
+</script>
+
+</body>
+</html>

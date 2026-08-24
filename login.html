@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal — Sign In &amp; Sign Up | Stackly</title>
+<meta name="description" content="Access the Stackly client portal to manage financial models, strategy sprints, and weekly executive deliverables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root {
+    --navy-950: #080D1B;
+    --navy-900: #0B1830;
+    --navy-850: #0F2038;
+    --navy-800: #132844;
+    --navy-700: #1C3253;
+    --amber-400: #FFA94D;
+    --amber-500: #FF8A1E;
+    --amber-600: #EA6D00;
+    --amber-badge: #FFC043;
+    --paper: #F5F7FB;
+    --white: #FFFFFF;
+    --ink-900: #111A2E;
+    --ink-700: #3B4762;
+    --slate-400: #93A1BE;
+    --slate-500: #6B7891;
+    --line: #E7EAF3;
+    --shadow-modal: 0 40px 100px -20px rgba(0, 0, 0, 0.45);
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--ink-900);
+    background: radial-gradient(circle at 50% 30%, #172B4D 0%, var(--navy-900) 50%, var(--navy-950) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Ambient glowing background orbs */
+  .bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 0;
+  }
+
+  .bg-orb--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 138, 30, 0.45), transparent 70%);
+    top: -100px;
+    left: 15%;
+  }
+
+  .bg-orb--2 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(28, 50, 83, 0.8), transparent 70%);
+    bottom: -100px;
+    right: 15%;
+  }
+
+  /* Grid background lines */
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  /* ================= MAIN AUTH MODAL CARD ================= */
+  .auth-modal {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1080px;
+    background: #EFECE6;
+    background: linear-gradient(135deg, #F5F3EF 0%, #E8E5DF 100%);
+    border-radius: 36px;
+    box-shadow: var(--shadow-modal);
+    display: grid;
+    grid-template-columns: 1.05fr 1.15fr;
+    padding: 16px;
+    overflow: hidden;
+    animation: modalPop 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes modalPop {
+    0% { opacity: 0; transform: scale(0.94) translateY(20px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* ================= LEFT: FORM CONTAINER ================= */
+  .auth-left {
+    padding: 28px 36px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Top Bar with Logo & Switcher */
+  .auth-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .brand-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid #DFDBD3;
+    padding: 8px 18px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .brand-pill img {
+    height: 18px;
+    width: auto;
+    display: block;
+  }
+
+  .brand-pill span {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: .92rem;
+    color: var(--ink-900);
+  }
+
+  /* Auth Mode Segmented Control */
+  .auth-mode-toggle {
+    display: flex;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+    padding: 3px;
+  }
+
+  .auth-mode-btn {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--slate-500);
+    transition: all .25s ease;
+  }
+
+  .auth-mode-btn.active {
+    background: #fff;
+    color: var(--ink-900);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Form Header */
+  .form-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .form-header h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #22252A;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .form-header p {
+    font-size: .88rem;
+    color: #6C727F;
+  }
+
+  /* Form Inputs */
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .input-field label {
+    font-size: .78rem;
+    color: #555A64;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-wrap input, .input-wrap select {
+    width: 100%;
+    background: #FAFAF8;
+    border: 1px solid #DDD9D0;
+    border-radius: 999px;
+    padding: 13px 20px;
+    font-size: .92rem;
+    color: #22252A;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+
+  .input-wrap input {
+    cursor: text;
+  }
+
+  .input-wrap select:focus, .input-wrap input:focus {
+    background: #fff;
+    border-color: var(--amber-500);
+    box-shadow: 0 0 0 3px rgba(255, 138, 30, 0.18);
+  }
+
+  .input-wrap .select-arrow {
+    position: absolute;
+    right: 18px;
+    color: #7D8492;
+    pointer-events: none;
+    font-size: .82rem;
+  }
+
+  .input-wrap .eye-toggle {
+    position: absolute;
+    right: 18px;
+    color: #7D8492;
+    cursor: pointer;
+    font-size: .95rem;
+    transition: color .2s ease;
+  }
+
+  .input-wrap .eye-toggle:hover {
+    color: var(--ink-900);
+  }
+
+  /* Submit Button (Amber / Yellow rounded button like reference image) */
+  .btn-submit {
+    background: #FFCA40;
+    background: linear-gradient(180deg, #FFD255 0%, #FFBE2E 100%);
+    color: #1A1102;
+    border-radius: 999px;
+    padding: 14px 20px;
+    font-size: .98rem;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 8px 20px -4px rgba(255, 190, 46, 0.5);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    margin-top: 4px;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -4px rgba(255, 190, 46, 0.65);
+    background: linear-gradient(180deg, #FFDA6B 0%, #FFC738 100%);
+  }
+
+  /* Social Auth Buttons */
+  .social-auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 2px;
+  }
+
+  .btn-social {
+    background: #F4F1EC;
+    border: 1px solid #D6D1C7;
+    border-radius: 999px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: .84rem;
+    font-weight: 600;
+    color: #333842;
+    transition: background .25s ease, border-color .25s ease, transform .2s ease;
+  }
+
+  .btn-social:hover {
+    background: #fff;
+    border-color: #BDB7AB;
+    transform: translateY(-1px);
+  }
+
+  .btn-social img {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Footer Terms & Sign In Switcher */
+  .auth-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .78rem;
+    color: #6C727F;
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 1px solid #DED9D0;
+  }
+
+  .auth-footer a {
+    color: #22252A;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .auth-footer a:hover {
+    color: var(--amber-600);
+  }
+
+  /* ================= RIGHT: VISUAL PREVIEW SIDE ================= */
+  .auth-right {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    min-height: 560px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.18);
+  }
+
+  .auth-right__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Top Right Close Button */
+  .auth-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    color: #22252A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .95rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transition: transform .25s ease, background .25s ease;
+    z-index: 10;
+  }
+
+  .auth-close-btn:hover {
+    background: #fff;
+    transform: rotate(90deg) scale(1.05);
+  }
+
+  /* ================= FLOATING OVERLAY WIDGETS ================= */
+  /* Widget 1: Top Yellow Task Card */
+  .widget-task-yellow {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: #FFCD48;
+    color: #1A1102;
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.25);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    animation: floatWidget1 5s ease-in-out infinite alternate;
+  }
+
+  .widget-task-yellow__title {
+    font-family: 'Sora', sans-serif;
+    font-size: .78rem;
+    font-weight: 800;
+  }
+
+  .widget-task-yellow__time {
+    font-size: .7rem;
+    opacity: 0.85;
+  }
+
+  .widget-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1A1102;
+  }
+
+  /* Widget 2: Dark Task Badge */
+  .widget-task-dark {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    background: rgba(22, 26, 35, 0.85);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: .68rem;
+    color: #D6DAE4;
+  }
+
+  .widget-dot-yellow {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FFCD48;
+  }
+
+  /* Clustered User Avatar Badges */
+  .floating-avatars {
+    position: absolute;
+    right: 48px;
+    top: 38%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 5;
+  }
+
+  .floating-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    overflow: hidden;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .floating-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Widget 3: Frosted Glass Calendar Bar */
+  .widget-calendar {
+    position: absolute;
+    bottom: 90px;
+    left: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 12px 16px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 4;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .calendar-days {
+    display: flex;
+    gap: 12px;
+  }
+
+  .calendar-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .calendar-day-name {
+    font-size: .65rem;
+    opacity: 0.8;
+  }
+
+  .calendar-day-num {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: .84rem;
+  }
+
+  .calendar-hash {
+    width: 48px;
+    height: 24px;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.35) 0,
+      rgba(255, 255, 255, 0.35) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    border-radius: 4px;
+  }
+
+  /* Widget 4: Bottom Daily Meeting Card */
+  .widget-meeting {
+    position: absolute;
+    bottom: 24px;
+    left: 20px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 16px;
+    color: #22252A;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+    min-width: 170px;
+    animation: floatWidget2 4.5s ease-in-out infinite alternate;
+  }
+
+  .widget-meeting__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+  }
+
+  .widget-meeting__title {
+    font-family: 'Sora', sans-serif;
+    font-size: .78rem;
+    font-weight: 800;
+  }
+
+  .widget-meeting__time {
+    font-size: .68rem;
+    color: #6C727F;
+    margin-bottom: 8px;
+  }
+
+  .widget-meeting__avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .widget-meeting__avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    overflow: hidden;
+    margin-left: -5px;
+  }
+
+  .widget-meeting__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .widget-meeting__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes floatWidget1 {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(6px); }
+  }
+
+  @keyframes floatWidget2 {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-6px); }
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 860px) {
+    .auth-modal {
+      grid-template-columns: 1fr;
+      border-radius: 28px;
+    }
+    .auth-right {
+      min-height: 380px;
+      margin-top: 20px;
+    }
+    .auth-left {
+      padding: 24px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ambient background shapes -->
+<div class="bg-orb bg-orb--1"></div>
+<div class="bg-orb bg-orb--2"></div>
+<div class="bg-grid"></div>
+
+<!-- MAIN MODAL -->
+<main class="auth-modal">
+  
+  <!-- LEFT: AUTH FORM -->
+  <div class="auth-left">
+    <!-- Brand & Tab Switcher -->
+    <div class="auth-top">
+      <a href="index.html" class="brand-pill" aria-label="Stackly Home">
+        <img src="images/Logo.webp" alt="Stackly">
+      </a>
+
+      <div class="auth-mode-toggle">
+        <button type="button" class="auth-mode-btn" id="btnModeLogin" onclick="switchMode('login')">Sign In</button>
+        <button type="button" class="auth-mode-btn active" id="btnModeSignup" onclick="switchMode('signup')">Sign Up</button>
+      </div>
+    </div>
+
+    <!-- Form Header (Dynamic based on mode) -->
+    <div class="form-header">
+      <h1 id="authTitle">Create an account</h1>
+      <p id="authSubtitle">Sign up and get 30 day free trial</p>
+    </div>
+
+    <!-- Main Interactive Form -->
+    <form class="auth-form" id="authForm" onsubmit="handleAuthSubmit(event)">
+      <!-- Account Role Selection (Admin / User) — shown on Sign In only -->
+      <div class="input-field" id="fieldUserRole" style="display:none;">
+        <label for="userRole">Select Role</label>
+        <div class="input-wrap">
+          <select id="userRole">
+            <option value="user" selected>User</option>
+            <option value="admin">Admin</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <!-- Name field (shown on signup) -->
+      <div class="input-field" id="fieldFullName">
+        <label for="fullName">Full name</label>
+        <div class="input-wrap">
+          <input type="text" id="fullName" placeholder="Alwin Thomas" required autocomplete="name">
+        </div>
+      </div>
+
+      <!-- Email field -->
+      <div class="input-field">
+        <label for="email">Email</label>
+        <div class="input-wrap">
+          <input type="email" id="email" placeholder="[EMAIL_ADDRESS]" required autocomplete="email">
+        </div>
+      </div>
+
+      <!-- Password field -->
+      <div class="input-field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="••••••••••••••••" required autocomplete="current-password">
+          <button type="button" class="eye-toggle" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+            <i class="fa-regular fa-eye-slash" id="eyeIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit" id="btnSubmit">Submit</button>
+
+      <!-- Social Login Buttons -->
+      <div class="social-auth">
+        <a href="404.html"><button type="button" class="btn-social" onclick="simulateSocialAuth('Apple')">
+          <i class="fa-brands fa-apple" style="font-size:1.1rem;color:#000;"></i> Apple
+        </button></a>
+        <a href="404.html"><button type="button" class="btn-social" onclick="simulateSocialAuth('Google')">
+          <svg style="width:15px;height:15px;" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          Google
+        </button></a>
+      </div>
+    </form>
+
+    <!-- Footer Links -->
+    <div class="auth-footer">
+      <span id="authFooterPrompt">Have an account? <a href="javascript:void(0)" onclick="switchMode('login')">Sign in</a></span>
+      <a href="404.html">Terms &amp; Conditions</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: VISUAL & FLOATING WIDGETS -->
+  <div class="auth-right">
+    <!-- Close / Exit button back to index.html -->
+    <a href="index.html" class="auth-close-btn" aria-label="Close and return home">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
+
+    <!-- High-res Team Collaboration Photo matching reference -->
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop" alt="Strategy team review" class="auth-right__bg-img">
+
+    <!-- Floating Widget 1: Yellow Top Task Card -->
+    <div class="widget-task-yellow">
+      <div>
+        <div class="widget-task-yellow__title">Task Review With Team</div>
+        <div class="widget-task-yellow__time">09:30am - 10:00am</div>
+      </div>
+      <div class="widget-dot"></div>
+    </div>
+
+    <!-- Floating Widget 2: Dark Task Badge -->
+    <div class="widget-task-dark">
+      <span>09:30am - 10:00am</span>
+      <div class="widget-dot-yellow"></div>
+    </div>
+
+    <!-- Clustered Circular User Avatars -->
+    <div class="floating-avatars">
+      <div class="floating-avatar">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" alt="Team member">
+      </div>
+      <div class="floating-avatar" style="margin-left:14px;">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop" alt="Team member">
+      </div>
+      <div class="floating-avatar" style="margin-left:6px;">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=150&auto=format&fit=crop" alt="Team member">
+      </div>
+    </div>
+
+    <!-- Floating Widget 3: Glass Calendar Timeline -->
+    <div class="widget-calendar">
+      <div class="calendar-days">
+        <div class="calendar-day"><span class="calendar-day-name">Sun</span><span class="calendar-day-num">22</span></div>
+        <div class="calendar-day"><span class="calendar-day-name">Mon</span><span class="calendar-day-num">23</span></div>
+        <div class="calendar-day"><span class="calendar-day-name">Tue</span><span class="calendar-day-num">24</span></div>
+        <div class="calendar-day"><span class="calendar-day-name">Wed</span><span class="calendar-day-num">25</span></div>
+        <div class="calendar-day"><span class="calendar-day-name">Thu</span><span class="calendar-day-num">26</span></div>
+        <div class="calendar-day"><span class="calendar-day-name">Fri</span><span class="calendar-day-num">27</span></div>
+        <div class="calendar-day"><span class="calendar-day-name">Sat</span><span class="calendar-day-num">28</span></div>
+      </div>
+      <div class="calendar-hash"></div>
+    </div>
+
+    <!-- Floating Widget 4: Daily Meeting Card -->
+    <div class="widget-meeting">
+      <div class="widget-meeting__top">
+        <div class="widget-meeting__title">Daily Meeting</div>
+        <div class="widget-dot-yellow"></div>
+      </div>
+      <div class="widget-meeting__time">12:00pm - 01:00pm</div>
+      <div class="widget-meeting__avatars">
+        <div class="widget-meeting__avatar">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="">
+        </div>
+        <div class="widget-meeting__avatar">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="">
+        </div>
+        <div class="widget-meeting__avatar">
+          <img src="https://images.unsplash.com/photo-1648474484044-bb82df2f5a1f?q=80&w=100&auto=format&fit=crop" alt="">
+        </div>
+        <div class="widget-meeting__avatar">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+let currentMode = 'signup';
+
+function switchMode(mode) {
+  currentMode = mode;
+  const title = document.getElementById('authTitle');
+  const subtitle = document.getElementById('authSubtitle');
+  const nameField = document.getElementById('fieldFullName');
+  const nameInput = document.getElementById('fullName');
+  const btnSubmit = document.getElementById('btnSubmit');
+  const btnLogin = document.getElementById('btnModeLogin');
+  const btnSignup = document.getElementById('btnModeSignup');
+  const footerPrompt = document.getElementById('authFooterPrompt');
+
+  const roleField = document.getElementById('fieldUserRole');
+  const roleSelect = document.getElementById('userRole');
+
+  if (mode === 'login') {
+    title.textContent = 'Welcome back';
+    subtitle.textContent = 'Sign in to access your client portal & dashboards';
+    nameField.style.display = 'none';
+    nameInput.removeAttribute('required');
+    if (roleField) roleField.style.display = 'flex';
+    if (roleSelect) roleSelect.setAttribute('required', 'true');
+    btnSubmit.textContent = 'Sign In';
+    btnLogin.classList.add('active');
+    btnSignup.classList.remove('active');
+    footerPrompt.innerHTML = "Don't have an account? <a href=\"javascript:void(0)\" onclick=\"switchMode('signup')\">Sign up</a>";
+    window.location.hash = 'login';
+  } else {
+    title.textContent = 'Create an account';
+    subtitle.textContent = 'Sign up and get 30 day free trial';
+    nameField.style.display = 'flex';
+    nameInput.setAttribute('required', 'true');
+    if (roleField) roleField.style.display = 'none';
+    if (roleSelect) roleSelect.removeAttribute('required');
+    btnSubmit.textContent = 'Submit';
+    btnSignup.classList.add('active');
+    btnLogin.classList.remove('active');
+    footerPrompt.innerHTML = "Have an account? <a href=\"javascript:void(0)\" onclick=\"switchMode('login')\">Sign in</a>";
+    window.location.hash = 'signup';
+  }
+}
+
+function togglePasswordVisibility() {
+  const pwd = document.getElementById('password');
+  const icon = document.getElementById('eyeIcon');
+  if (pwd.type === 'password') {
+    pwd.type = 'text';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+  } else {
+    pwd.type = 'password';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  }
+}
+
+function handleAuthSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnSubmit');
+  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
+  btn.style.pointerEvents = 'none';
+
+  // Collect form data
+  const role = document.getElementById('userRole').value; // 'admin' or 'user'
+  const emailVal = document.getElementById('email').value.trim();
+  let userName = '';
+
+  if (currentMode === 'signup') {
+    // Use the Full Name field when signing up
+    userName = document.getElementById('fullName').value.trim();
+  } else {
+    // For login, derive a display name from the email (part before @)
+    const storedName = localStorage.getItem('stackly_user_name');
+    userName = storedName || emailVal.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  // Persist to localStorage so dashboards can read it
+  localStorage.setItem('stackly_user_name', userName);
+  localStorage.setItem('stackly_user_role', role);
+
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Success! Redirecting...';
+    btn.style.background = 'linear-gradient(180deg, #10B981 0%, #059669 100%)';
+    btn.style.color = '#fff';
+
+    const destination = role === 'admin' ? 'admin.html' : 'user.html';
+    setTimeout(() => {
+      window.location.href = destination;
+    }, 1200);
+  }, 1000);
+}
+
+function simulateSocialAuth(provider) {
+  const btn = document.getElementById('btnSubmit');
+  btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Connecting to ${provider}...`;
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 900);
+}
+
+// Check initial URL hash
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash === '#login') {
+    switchMode('login');
+  } else {
+    switchMode('signup');
+  }
+});
+</script>
+
+</body>
+</html>
