@@ -36,6 +36,12 @@
     padding: 0;
   }
 
+  html {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: var(--ink-900);
@@ -46,6 +52,8 @@
     justify-content: center;
     padding: 30px 20px;
     overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
     position: relative;
   }
 
@@ -217,11 +225,62 @@
     gap: 5px;
   }
 
+  .label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+  }
+
   .input-field label {
     font-size: .78rem;
     color: #555A64;
     font-weight: 600;
     margin-left: 8px;
+  }
+
+  .label-row label {
+    margin-left: 0;
+  }
+
+  .forgot-link {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--amber-600);
+    transition: color .2s ease, text-decoration .2s ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .forgot-link:hover {
+    color: var(--amber-500);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .forgot-pass-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+    padding: 0 6px;
+  }
+
+  .form-error {
+    font-size: .78rem;
+    font-weight: 600;
+    color: #E5484D;
+    margin-left: 8px;
+    margin-top: 4px;
+    display: none;
+    align-items: center;
+    gap: 5px;
+    animation: shakeError 0.35s ease;
+  }
+
+  @keyframes shakeError {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
   }
 
   .input-wrap {
@@ -256,6 +315,11 @@
     box-shadow: 0 0 0 3px rgba(255, 138, 30, 0.18);
   }
 
+  .input-wrap.has-error input {
+    border-color: #E5484D;
+    box-shadow: 0 0 0 3px rgba(229, 72, 77, 0.18);
+  }
+
   .input-wrap .select-arrow {
     position: absolute;
     right: 18px;
@@ -275,6 +339,111 @@
 
   .input-wrap .eye-toggle:hover {
     color: var(--ink-900);
+  }
+
+  /* ================= FORGOT PASSWORD MODAL ================= */
+  .forgot-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 13, 27, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .forgot-modal-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .forgot-modal-card {
+    background: linear-gradient(135deg, #F9F8F5 0%, #EFECE6 100%);
+    border: 1px solid #DFDBD3;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 440px;
+    padding: 32px 28px 26px;
+    box-shadow: 0 30px 80px -10px rgba(0, 0, 0, 0.55);
+    position: relative;
+    transform: scale(0.92) translateY(18px);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .forgot-modal-backdrop.is-open .forgot-modal-card {
+    transform: scale(1) translateY(0);
+  }
+
+  .forgot-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #E5E0D7;
+    color: #22252A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .forgot-modal-close:hover {
+    background: #D5CFC3;
+    transform: rotate(90deg);
+  }
+
+  .forgot-icon-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255, 138, 30, 0.2), rgba(255, 138, 30, 0.05));
+    border: 1px solid rgba(255, 138, 30, 0.3);
+    color: var(--amber-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .forgot-header h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #22252A;
+    margin-bottom: 6px;
+  }
+
+  .forgot-header p {
+    font-size: 0.86rem;
+    color: #6C727F;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .forgot-alert {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
   }
 
   /* Submit Button (Amber / Yellow rounded button like reference image) */
@@ -723,13 +892,31 @@
       </div>
 
       <!-- Password field -->
-      <div class="input-field">
+      <div class="input-field" id="fieldPassword">
         <label for="password">Password</label>
-        <div class="input-wrap">
+        <div class="input-wrap" id="wrapPassword">
           <input type="password" id="password" placeholder="••••••••••••••••" required autocomplete="current-password">
-          <button type="button" class="eye-toggle" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+          <button type="button" class="eye-toggle" onclick="togglePasswordVisibility('password', 'eyeIcon')" aria-label="Toggle password visibility">
             <i class="fa-regular fa-eye-slash" id="eyeIcon"></i>
           </button>
+        </div>
+        <div class="forgot-pass-row" id="forgotPassRow" style="display:none;">
+          <a href="404.html" class="forgot-link" id="forgotPassLink">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Confirm Password field (shown on signup only) -->
+      <div class="input-field" id="fieldConfirmPassword">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-wrap" id="wrapConfirmPassword">
+          <input type="password" id="confirmPassword" placeholder="••••••••••••••••" autocomplete="new-password">
+          <button type="button" class="eye-toggle" onclick="togglePasswordVisibility('confirmPassword', 'eyeConfirmIcon')" aria-label="Toggle confirm password visibility">
+            <i class="fa-regular fa-eye-slash" id="eyeConfirmIcon"></i>
+          </button>
+        </div>
+        <div class="form-error" id="confirmPasswordError">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>Passwords do not match. Please try again.</span>
         </div>
       </div>
 
@@ -847,6 +1034,11 @@ function switchMode(mode) {
   const subtitle = document.getElementById('authSubtitle');
   const nameField = document.getElementById('fieldFullName');
   const nameInput = document.getElementById('fullName');
+  const confirmPassField = document.getElementById('fieldConfirmPassword');
+  const confirmPassInput = document.getElementById('confirmPassword');
+  const confirmPassError = document.getElementById('confirmPasswordError');
+  const wrapConfirmPass = document.getElementById('wrapConfirmPassword');
+  const forgotPassRow = document.getElementById('forgotPassRow');
   const btnSubmit = document.getElementById('btnSubmit');
   const btnLogin = document.getElementById('btnModeLogin');
   const btnSignup = document.getElementById('btnModeSignup');
@@ -855,11 +1047,21 @@ function switchMode(mode) {
   const roleField = document.getElementById('fieldUserRole');
   const roleSelect = document.getElementById('userRole');
 
+  // Reset any error states
+  if (confirmPassError) confirmPassError.style.display = 'none';
+  if (wrapConfirmPass) wrapConfirmPass.classList.remove('has-error');
+
   if (mode === 'login') {
     title.textContent = 'Welcome back';
     subtitle.textContent = 'Sign in to access your client portal & dashboards';
     nameField.style.display = 'none';
     nameInput.removeAttribute('required');
+    if (confirmPassField) confirmPassField.style.display = 'none';
+    if (confirmPassInput) {
+      confirmPassInput.removeAttribute('required');
+      confirmPassInput.value = '';
+    }
+    if (forgotPassRow) forgotPassRow.style.display = 'flex';
     if (roleField) roleField.style.display = 'flex';
     if (roleSelect) roleSelect.setAttribute('required', 'true');
     btnSubmit.textContent = 'Sign In';
@@ -872,6 +1074,9 @@ function switchMode(mode) {
     subtitle.textContent = 'Sign up and get 30 day free trial';
     nameField.style.display = 'flex';
     nameInput.setAttribute('required', 'true');
+    if (confirmPassField) confirmPassField.style.display = 'flex';
+    if (confirmPassInput) confirmPassInput.setAttribute('required', 'true');
+    if (forgotPassRow) forgotPassRow.style.display = 'none';
     if (roleField) roleField.style.display = 'none';
     if (roleSelect) roleSelect.removeAttribute('required');
     btnSubmit.textContent = 'Submit';
@@ -882,9 +1087,10 @@ function switchMode(mode) {
   }
 }
 
-function togglePasswordVisibility() {
-  const pwd = document.getElementById('password');
-  const icon = document.getElementById('eyeIcon');
+function togglePasswordVisibility(inputId = 'password', iconId = 'eyeIcon') {
+  const pwd = document.getElementById(inputId);
+  const icon = document.getElementById(iconId);
+  if (!pwd || !icon) return;
   if (pwd.type === 'password') {
     pwd.type = 'text';
     icon.classList.remove('fa-eye-slash');
@@ -898,6 +1104,28 @@ function togglePasswordVisibility() {
 
 function handleAuthSubmit(e) {
   e.preventDefault();
+  
+  const pwd = document.getElementById('password').value;
+  const confirmPwdInput = document.getElementById('confirmPassword');
+  const confirmError = document.getElementById('confirmPasswordError');
+  const wrapConfirm = document.getElementById('wrapConfirmPassword');
+
+  // Validate password match in signup mode
+  if (currentMode === 'signup') {
+    const confirmPwd = confirmPwdInput.value;
+    if (pwd !== confirmPwd) {
+      if (confirmError) confirmError.style.display = 'flex';
+      if (wrapConfirm) {
+        wrapConfirm.classList.add('has-error');
+      }
+      confirmPwdInput.focus();
+      return false;
+    } else {
+      if (confirmError) confirmError.style.display = 'none';
+      if (wrapConfirm) wrapConfirm.classList.remove('has-error');
+    }
+  }
+
   const btn = document.getElementById('btnSubmit');
   btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
   btn.style.pointerEvents = 'none';

@@ -38,6 +38,9 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
   }
 
   body {
@@ -46,7 +49,15 @@
     background: var(--white);
     line-height: 1.65;
     overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+    position: relative;
     -webkit-font-smoothing: antialiased;
+  }
+
+  section {
+    position: relative;
+    overflow-x: clip;
   }
 
   img {
@@ -1151,6 +1162,9 @@
   }
 
   @media (max-width: 900px) {
+    .reveal-left, .reveal-right {
+      transform: translateY(24px);
+    }
     .container {
       padding: 0 24px;
     }
@@ -1159,7 +1173,7 @@
       top: 0;
       right: 0;
       height: 100vh;
-      width: min(320px, 82vw);
+      width: min(300px, 80vw);
       background: var(--navy-900);
       flex-direction: column;
       align-items: flex-start;
